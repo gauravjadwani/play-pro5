@@ -169,6 +169,7 @@ $result=$GLOBALS['r']->zscore('state:user',$user_id);
     
     
 }
+
 ///----------------------------------user---------------------------------------///
 
 
@@ -182,9 +183,13 @@ function create_group_db($name,$created_on,$closed_on,$created_by,$list_of_proje
              $group_id=$GLOBALS['r']->hget('parent','group_id');
     $GLOBALS['r']->hMset('group',array('name:'.$group_id=>$name,'created_on:'.$group_id=>$created_on,'closed_on:'.$group_id=>$closed_on,'created_by:'.$group_id=>$created_by,'list_of_projects:'.$group_id=>$list_of_projects)); 
     $GLOBALS['r']->hincrby('parent','group_id',1);
-        //$email_user_id=$GLOBALS['r']->hget('user','email:'.$created_by);
         
-        add_group_to_user_list_of_groups_db($created_by,$group_id);
+
+        $email_user_id=$GLOBALS['r']->hget('user','email:'.$created_by);
+        set_permissions_for_group_db($group_id,$email_user_id,1);
+
+        
+        //add_group_to_user_list_of_groups_db($created_by,$group_id);
 
        return $group_id;
         }
@@ -272,8 +277,40 @@ function set_permissions_for_group_db($group_id,$list_of_email,$token)
 }
     return 'set_permissions_db_functions';
 }
-///////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+function get_list_user_groups_db($user_id)
+{
+$list=$GLOBALS['r']->hget('user','list_of_groups:'.$user_id);
+    if($list!='null')
+    {
+    $list_jsondeocde=json_decode($list,true);
+    return $list_jsondeocde;
+    }
+    else
+    {
+        return 'no groups';
+    }
+}
+//////////////////////////////////////////////////////////////////////////////////////
+function check_user_permission_for_group_db($group_id,$user_id)
+{
 
+$p=$GLOBALS['r']->zscore('group_permissions:'.$group_id,$user_id);
+    //print_r($p);
+//exit();
+    
+        if($p==1)
+            return 'o';
+       elseif($p==2)
+            return 'm';
+       elseif($p==3)
+            return 'r';
+        else 
+            return 'user_permission for group not found';
+
+        //exit();
+
+}
 
 
 ?>

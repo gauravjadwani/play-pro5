@@ -74,6 +74,16 @@ function set_permissions_for_group($group_id,$list_of_email,$token)
     $check=set_permissions_for_group_db($group_id,$list_of_email,$token);
     return $check;
 }
+function get_list_user_groups($user_id)
+{
 
+    $list=get_list_user_groups_db($user_id);
+    return $list;
+}
+function   check_user_permission_for_group($group_id,$user_id)
+{
 
+    $permission=check_user_permission_for_group_db($group_id,$user_id);
+    return $permission;
+} 
 ?>
