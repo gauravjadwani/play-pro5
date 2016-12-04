@@ -7,13 +7,15 @@ include_once '../controller/user_groups.php'
     <div class='container'>
         <div class='row'>
             <div class="col-sm-3"></div>
-            <form action='../controller/add_group.php' method='POST'>
+            <form action='../controller/add_members_group.php' method='POST'>
             <div class="col-sm-7">
                     <h1>GROUP DETAILS</h1>
                     <hr>
                     <div class="<form-group">
                         
-                <select class="form-control" name="group">
+                <select class="form-control" name="group_id">
+                <option selected value='default'>no group selected</option>
+
                 <?php
                     foreach ($list_modifier as $l) 
                     
@@ -23,7 +25,7 @@ include_once '../controller/user_groups.php'
 
                 ?>
       
-              <option  selected value='default'><?php echo $l; ?></option>
+              <option value='<?php echo $l; ?>'><?php echo $l; ?></option>
               <?php
                     }
               ?>
@@ -37,7 +39,7 @@ include_once '../controller/user_groups.php'
 
                 ?>
       
-              <option  selected value='default'><?php echo $l; ?></option>
+              <option value='<?php echo $l; ?>'><?php echo $l; ?></option>
               <?php
                     }
               ?>

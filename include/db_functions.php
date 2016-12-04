@@ -237,6 +237,7 @@ function add_group_to_user_list_of_groups_db($user_id,$group_id)
 //2 is for modifier,3 is for read-only,1 is for the owner
 function set_permissions_for_group_db($group_id,$list_of_email,$token)
 {
+    $value1='null';
     $group_name=$GLOBALS['r']->hget('group','name:'.$group_id);
     $split_email=split(",",$list_of_email);
     
@@ -259,15 +260,18 @@ function set_permissions_for_group_db($group_id,$list_of_email,$token)
     elseif($token==2)
     {
        $value='you were added in the group '.$group_name.' on '.$current_time.' as modifier';
-     
+        $value1='you added '.$split_email[i].' in the group '.$group_name.' as modifier';
     }
     elseif($token==3)
     {
-     $value='you were added in the group '.$group_name.' on '.$current_time.' as readonly';
+         $value='you were added in the group '.$group_name.' on '.$current_time.' as readonly';
+         $value1='you added '.$split_email[i].' in the group '.$group_name.' as readonly';
+
     }
         
            
             user_set_notifications_db($user_id_email,$current_time,$value);
+            
          add_group_to_user_list_of_groups_db($user_id_email,$group_id);
 }
     else
