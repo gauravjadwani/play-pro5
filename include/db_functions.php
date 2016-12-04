@@ -169,7 +169,110 @@ $result=$GLOBALS['r']->zscore('state:user',$user_id);
     
     
 }
+///----------------------------------user---------------------------------------///
 
+
+
+///-----------------------------------group--------------------------------------///
+
+function create_group_db($name,$created_on,$closed_on,$created_by,$list_of_projects)
+    {
+        
+            $GLOBALS['r']->hsetnx('parent','group_id','1');
+             $group_id=$GLOBALS['r']->hget('parent','group_id');
+    $GLOBALS['r']->hMset('group',array('name:'.$group_id=>$name,'created_on:'.$group_id=>$created_on,'closed_on:'.$group_id=>$closed_on,'created_by:'.$group_id=>$created_by,'list_of_projects:'.$group_id=>$list_of_projects)); 
+    $GLOBALS['r']->hincrby('parent','group_id',1);
+        //$email_user_id=$GLOBALS['r']->hget('user','email:'.$created_by);
+        
+        add_group_to_user_list_of_groups_db($created_by,$group_id);
+
+       return $group_id;
+        }
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+        
+function add_group_to_user_list_of_groups_db($user_id,$group_id)
+{
+    $list=$GLOBALS['r']->hget('user','list_of_groups:'.$user_id);
+    if($list!='null')
+    {
+      
+        
+        $list_jsondeocde=json_decode($list,true);
+        
+         //$d=array();
+        //$list=array($group_id);
+        //array_merge(array1)($list_jsondeocde,$list);
+        
+            array_push($list_jsondeocde,$group_id);
+        
+        $list_jsonencode=json_encode($list_jsondeocde);
+        
+        $GLOBALS['r']->hset('user','list_of_groups:'.$user_id,$list_jsonencode);
+        
+        
+    }
+    else
+    {
+           //$d=array();
+        $p=array($group_id);
+        //array_push($d,$p);
+        $j=json_encode($p);
+        
+        
+        //$list=array($group_id);
+        //$list_jsonencode=json_encode($d);
+    $GLOBALS['r']->hset('user','list_of_groups:'.$user_id,$j);
+        
+    }
+    }
+///////////////////////////////////////////////////////////////////////////
+
+//2 is for modifier,3 is for read-only,1 is for the owner
+function set_permissions_for_group_db($group_id,$list_of_email,$token)
+{
+    $group_name=$GLOBALS['r']->hget('group','name:'.$group_id);
+    $split_email=split(",",$list_of_email);
+    
+    for($i=0;$i<sizeof($split_email);$i++)
+{
+    $user_id_email=$GLOBALS['r']->hget('email:user',$split_email[$i]);
+    
+    $GLOBALS['r']->zadd("group_permissions:".$group_id,$token,$user_id_email);
+    
+   
+        //$user_id=$GLOBALS['r']->hget('email:user',split_email($i));
+    $user_id=check_existence_of_user_email_db($split_email[$i]);    
+    if($user_id!='false')
+    {
+    $current_time=time();
+    if($token==1)
+    {
+    $value='you created the group '.$group_name.' ';
+        }
+    elseif($token==2)
+    {
+       $value='you were added in the group '.$group_name.' on '.$current_time.' as modifier';
+     
+    }
+    elseif($token==3)
+    {
+     $value='you were added in the group '.$group_name.' on '.$current_time.' as readonly';
+    }
+        
+           
+            user_set_notifications_db($user_id_email,$current_time,$value);
+         add_group_to_user_list_of_groups_db($user_id_email,$group_id);
+}
+    else
+    {
+        continue;
+    }
+}
+    return 'set_permissions_db_functions';
+}
+///////////////////////////////////////////////////////////////
 
 
 

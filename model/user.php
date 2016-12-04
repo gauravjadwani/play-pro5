@@ -58,7 +58,22 @@ $check_login=user_login_db($user_id,$user_password);
 return $check_login;
 }
 
+//-----------------------------------------group----------------------------------//
 
+function create_group($name,$created_on,$closed_on,$created_by,$list_of_projects)
+{   
+    
+$check=create_group_db($name,$created_on,$closed_on,$created_by,$list_of_projects);
+    return $check;
+
+}
+
+
+function set_permissions_for_group($group_id,$list_of_email,$token)
+{
+    $check=set_permissions_for_group_db($group_id,$list_of_email,$token);
+    return $check;
+}
 
 
 ?>
