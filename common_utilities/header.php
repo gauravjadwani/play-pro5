@@ -32,7 +32,7 @@ include_once '../config/session.php';
     <li><a href="../view/add_project.php"><span class="glyphicon glyphicon-log-in"></span>ADD PROJECT</a></li>
      <li><a href="../view/add_group.php"><span class="glyphicon glyphicon-log-in"></span> ADD_GROUP</a></li>
     <li><a href="../views/user_projects.php"><span class="glyphicon glyphicon-log-in"></span>VIEW PROJECTS</a></li>
-    <li><a href="view_as_date.php"><span class="glyphicon glyphicon-log-in"></span>VIEW TASK AS DATE</a></li>
+    <li><a href="../views/add_members_group.php"><span class="glyphicon glyphicon-log-in"></span>ADD MEMBERS</a></li>
         
     <li><a href="../controller/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
     

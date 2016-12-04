@@ -86,4 +86,21 @@ function   check_user_permission_for_group($group_id,$user_id)
     $permission=check_user_permission_for_group_db($group_id,$user_id);
     return $permission;
 } 
+
+function view_group_details($group_id)
+{
+    $details=view_group_details_db($group_id);
+    return $details;
+
+}
+
+//----------------------------------project----------------------------------------//
+
+function create_project($name,$created_on,$desc,$deadline,$associated_group,$list_of_tasks,$closed_on,$created_by)
+{
+    $project_id=create_project_db($name,$created_on,$desc,$deadline,$associated_group,$list_of_tasks,$closed_on,$created_by);
+    return $project_id;
+}
+
+
 ?>

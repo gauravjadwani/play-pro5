@@ -271,7 +271,7 @@ function set_permissions_for_group_db($group_id,$list_of_email,$token)
         
            
             user_set_notifications_db($user_id_email,$current_time,$value);
-            
+
          add_group_to_user_list_of_groups_db($user_id_email,$group_id);
 }
     else
@@ -315,6 +315,98 @@ $p=$GLOBALS['r']->zscore('group_permissions:'.$group_id,$user_id);
         //exit();
 
 }
+///////////////////////////////////////////////////////////////////////////////////////////
+function view_group_details_db($group_id)
+{
+$group_details=array();
+$list=$GLOBALS['r']->hget('group','name:'.$group_id);
+array_push($group_details,$list);
+
+$list=$GLOBALS['r']->hget('group','created_on:'.$group_id);
+array_push($group_details,$list);
+
+$list=$GLOBALS['r']->hget('group','closed_on:'.$group_id);
+array_push($group_details,$list);
+
+
+$list=$GLOBALS['r']->hget('group','created_by:'.$group_id);
+array_push($group_details,$list);
+
+
+$list=$GLOBALS['r']->hget('group','list_of_projects:'.$group_id);
+$list1=json_decode($list,true);
+array_push($group_details,$list1);
+
+return $group_details;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+////------------------------------projects---------------------------------------------////
+
+function create_project_db($name,$created_on,$desc,$deadline,$associated_group,$list_of_tasks,$closed_on,$created_by)
+{
+    $current_time=time();
+
+    $GLOBALS['r']->hsetnx('parent','project_id','1');
+    $project_id=$GLOBALS['r']->hget('parent','project_id');
+$GLOBALS['r']->hMset('project',array('name:'.$project_id=>$name,'created_on:'.$project_id=>$created_on,'desc:'.$project_id=>$desc,'deadline:'.$project_id=>$deadline,'associated_group:'.$project_id=>$associated_group,'list_of_tasks:'.$project_id=>$list_of_tasks,'closed_on:'.$project_id=>$closed_on,'created_by:'.$project_id=>$created_by)); 
+    
+    user_set_notifications_db($created_by,$current_time,'you created the project '.$name.' on  '.$created_on);
+    
+    user_set_notifications_db($created_by,$current_time,'you added the group id:'.$associated_group.' on  '.$created_on.' in the project '.$name);
+     $GLOBALS['r']->hincrby('parent','project_id',1);
+    
+     add_project_list_group($project_id,$associated_group);
+    return $project_id;
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+function add_project_list_group($project_id,$group_id)
+{
+
+$list=$GLOBALS['r']->hget('group','list_of_projects:'.$group_id);
+    if($list!='null')
+    {
+      
+        
+        $list_jsondeocde=json_decode($list,true);
+        
+         //$d=array();
+        //$list=array($group_id);
+        //array_merge(array1)($list_jsondeocde,$list);
+        
+            array_push($list_jsondeocde,$project_id);
+        
+        $list_jsonencode=json_encode($list_jsondeocde);
+        
+        $GLOBALS['r']->hset('group','list_of_projects:'.$group_id,$list_jsonencode);
+        
+        
+    }
+    else
+    {
+           //$d=array();
+        $p=array($project_id);
+        //array_push($d,$p);
+        $j=json_encode($p);
+        
+        
+        //$list=array($group_id);
+        //$list_jsonencode=json_encode($d);
+    $GLOBALS['r']->hset('group','list_of_projects:'.$group_id,$j);
+        
+    }
+    }
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 ?>
