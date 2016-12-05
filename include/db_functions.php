@@ -434,7 +434,9 @@ $list=$GLOBALS['r']->hget('group','list_of_projects:'.$group_id);
 /////////////////////////////////////////////////////////////////////////////////////////////////
 function view_project_details_db($project_id)
 {
-    $project_details=array();
+     $project_details=array();
+    array_push($project_details,$project_id);
+   
 $list=$GLOBALS['r']->hget('project','name:'.$project_id);
 array_push($project_details,$list);
 
@@ -443,6 +445,10 @@ array_push($project_details,$list);
 
 $list=$GLOBALS['r']->hget('project','deadline:'.$project_id);
 array_push($project_details,$list);
+
+$list=$GLOBALS['r']->hget('project','desc:'.$project_id);
+array_push($project_details,$list);
+
 
 
 $list=$GLOBALS['r']->hget('project','associated_group:'.$project_id);
@@ -502,8 +508,14 @@ return $project_details;
                 return $list_projects;
     }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /*function view_user_projects($user_id)
+    {
+        list_of_groups=$
 
+    }
+*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -604,6 +616,7 @@ $association='project:'.$project_id;
 $GLOBALS['r']->hset('task','association:'.$task_id,$association);
 
 add_task_project_list_of_tasks_db($task_id,$project_id);
+return 'true';
 }
 else
 {

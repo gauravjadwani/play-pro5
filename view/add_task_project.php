@@ -13,7 +13,7 @@
 
         
         
-    <form action="../controller/add_task_to_project.php" method="POST">
+    <form action="../controller/add_task_project.php" method="POST">
         
 <div class="container">
     <div class="row">
@@ -44,8 +44,7 @@
             <div class='col-md-10'>
                 
                 <select class="form-control" name="project_id">
-      
-      
+        <option value="default">default</option>      
       <?php
 //print_r($list_project_modifier);
 foreach ($list_project_modifier as $pro) 

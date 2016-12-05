@@ -132,11 +132,11 @@ return $check;
 }
 
 
-function add_task_to_projec($task_id,$project_id)
+function add_task_to_project($task_id,$project_id)
 {
 
-add_task_to_project_db($task_id,$project_id);
-
+$check=add_task_to_project_db($task_id,$project_id);
+return $check;
 }
 
 function view_self_tasks($user_id)
