@@ -102,5 +102,39 @@ function create_project($name,$created_on,$desc,$deadline,$associated_group,$lis
     return $project_id;
 }
 
+function list_user_projects($user_id)
+{
+    $list=list_user_projects_db($user_id);
+    return $list;
+}
+function view_project_details($project_id)
+{
+$project_details=view_project_details_db($project_id);
+return $project_details;
+}
 
+//----------------------------------------task-----------------------------------------------//
+
+
+function create_task($name,$assinged_for,$created_on,$association,$initiator,$priority,$closed_on)
+{
+    $task_id=create_task_db($name,$assinged_for,$created_on,$association,$initiator,$priority,$closed_on);
+    return $task_id;
+
+}
+
+function add_task_to_self($task_id,$user_id)
+{
+
+add_task_to_self_db($task_id,$user_id);
+
+}
+
+
+function add_task_to_project($task_id,$project_id)
+{
+
+add_task_to_project_db($task_id,$project_id);
+
+}
 ?>

@@ -170,6 +170,35 @@ $result=$GLOBALS['r']->zscore('state:user',$user_id);
     
 }
 
+
+function view_user_details_db($user_id)
+{
+
+
+$user_details=array();
+$list=$GLOBALS['r']->hget('user','name:'.$user_id);
+array_push($user_details,$list);
+
+$list=$GLOBALS['r']->hget('user','mobile:'.$user_id);
+array_push($user_details,$list);
+
+$list=$GLOBALS['r']->hget('user','email:'.$user_id);
+array_push($user_details,$list);
+
+
+$list=$GLOBALS['r']->hget('user','list_of_groups:'.$user_id);
+$list1=json_decode($list,true);
+array_push($user_details,$list1);
+
+
+$list=$GLOBALS['r']->hget('user','list_of_tasks_self:'.$user_id);
+$list1=json_decode($list,true);
+array_push($user_details,$list1);
+
+return $user_details;
+}
+
+
 ///----------------------------------user---------------------------------------///
 
 
@@ -401,10 +430,233 @@ $list=$GLOBALS['r']->hget('group','list_of_projects:'.$group_id);
     }
     }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+function view_project_details_db($project_id)
+{
+    $project_details=array();
+$list=$GLOBALS['r']->hget('project','name:'.$project_id);
+array_push($project_details,$list);
+
+$list=$GLOBALS['r']->hget('project','created_on:'.$project_id);
+array_push($project_details,$list);
+
+$list=$GLOBALS['r']->hget('project','deadline:'.$project_id);
+array_push($project_details,$list);
+
+
+$list=$GLOBALS['r']->hget('project','associated_group:'.$project_id);
+//$list1=json_decode($list,true);
+array_push($project_details,$list);
+
+
+$list=$GLOBALS['r']->hget('project','list_of_tasks:'.$project_id);
+
+$list1=json_decode($list,true);
+//var_dump($list1);
+//exit();
+array_push($project_details,$list1);
+
+$list=$GLOBALS['r']->hget('project','closed_on:'.$project_id);
+array_push($project_details,$list);
+
+$list=$GLOBALS['r']->hget('project','created_by:'.$project_id);
+array_push($project_details,$list);
+
+
+return $project_details;
+
+
+
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    function list_user_projects_db($user_id)
+    {
+        $list_projects=array();
+        $details=view_user_details_db($user_id);
+
+        $list_of_groups=$details[3];
+        //var_dump($list_of_groups);
+        //exit();
+                    if($list_of_groups!=null)
+                foreach ($list_of_groups as $group_id)
+                {
+            $group_details=view_group_details_db($group_id);
+                        if($group_details!='null')
+                    foreach ($group_details[4] as $projects) 
+                    {
+                        array_push($list_projects,$projects);
+                    }
+
+
+                }
+
+                return $list_projects;
+    }
+
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//------------------------------------tasks--------------------------------------------------//
+
+function create_task_db($name,$assinged_for,$created_on,$association,$initiator,$priority,$closed_on)
+{
+    $GLOBALS['r']->hsetnx('parent','task_id','1');
+    $project_id=$GLOBALS['r']->hget('parent','task_id');
+$GLOBALS['r']->hMset('task',array('name:'.$task_id=>$name,'assinged_for:'.$task_id=>$assinged_for,'created_on:'.$task_id=>$created_on,'association:'.$task_id=>'null','initiator:'.$task_id=>$initiator,'priority:'.$task_id=>$priority,'closed_on:'.$task_id=>$closed_on)); 
+    
+    
+     $GLOBALS['r']->hincrby('parent','task_id',1);
+
+    return $task_id;
+    
+    
+}
+
+function add_task_to_self_db($task_id,$user_id)
+{
+
+$check=$GLOBALS['r']->hget('task','association:'.$task_id);
+if($check=='null')
+{
+$association='self:'.$user_id;
+$GLOBALS['r']->hset('task','association:'.$task_id,$association);
+
+add_self_task_user_list_of_tasks_db($task_id,$user_id);
+}
+else
+{
+    return 'task has been assinged';
+}
+
+}
+        
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+function add_self_task_user_list_of_tasks_db($task_id,$user_id)
+{
+
+
+$list=$GLOBALS['r']->hget('user','list_of_tasks_self:'.$user_id);
+    if($list!='null')
+    {
+      
+        
+        $list_jsondeocde=json_decode($list,true);
+        
+         //$d=array();
+        //$list=array($group_id);
+        //array_merge(array1)($list_jsondeocde,$list);
+        
+            array_push($list_jsondeocde,$task_id);
+        
+        $list_jsonencode=json_encode($list_jsondeocde);
+        
+        $GLOBALS['r']->hset('user','list_of_tasks_self:'.$user_id,$list_jsonencode);
+        
+        
+    }
+    else
+    {
+           //$d=array();
+        $p=array($task_id);
+        //array_push($d,$p);
+        $j=json_encode($p);
+        
+        
+        //$list=array($group_id);
+        //$list_jsonencode=json_encode($d);
+    $GLOBALS['r']->hset('user','list_of_tasks_self:'.$user_id,$j);
+        
+    }
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+    function add_task_to_project_db($task_id,$project_id)
+    {
+
+
+$check=$GLOBALS['r']->hget('task','association:'.$task_id);
+if($check=='null')
+{
+$association='project:'.$project_id;
+$GLOBALS['r']->hset('task','association:'.$task_id,$association);
+
+add_task_project_list_of_tasks_db($task_id,$project_id);
+}
+else
+{
+    return 'task has been assinged';
+}
+
+
+    }
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+    function add_task_project_list_of_tasks_db($task_id,$project_id)
+    {
+
+
+$list=$GLOBALS['r']->hget('project','list_of_tasks:'.$project_id);
+    if($list!='null')
+    {
+      
+        
+        $list_jsondeocde=json_decode($list,true);
+        
+         //$d=array();
+        //$list=array($group_id);
+        //array_merge(array1)($list_jsondeocde,$list);
+        
+            array_push($list_jsondeocde,$task_id);
+        
+        $list_jsonencode=json_encode($list_jsondeocde);
+        
+        $GLOBALS['r']->hset('project','list_of_tasks:'.$project_id,$list_jsonencode);
+        
+        
+    }
+    else
+    {
+           //$d=array();
+        $p=array($task_id);
+        //array_push($d,$p);
+        $j=json_encode($p);
+        
+        
+        //$list=array($group_id);
+        //$list_jsonencode=json_encode($d);
+    $GLOBALS['r']->hset('project','list_of_tasks:'.$project_id,$j);
+        
+    }
+    }
+
+
+
+    
+
+
+
+
+
+
+      
+
+
+
+
+
+
 
 
 
