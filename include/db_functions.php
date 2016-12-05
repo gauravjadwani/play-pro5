@@ -513,8 +513,11 @@ return $project_details;
 
 function create_task_db($name,$assinged_for,$created_on,$initiator,$priority,$closed_on)
 {
+    //echo $initiator;
+    //echo $priority;
+    //exit();
     $GLOBALS['r']->hsetnx('parent','task_id','1');
-    $project_id=$GLOBALS['r']->hget('parent','task_id');
+    $task_id=$GLOBALS['r']->hget('parent','task_id');
 $GLOBALS['r']->hMset('task',array('name:'.$task_id=>$name,'assinged_for:'.$task_id=>$assinged_for,'created_on:'.$task_id=>$created_on,'association:'.$task_id=>'null','initiator:'.$task_id=>$initiator,'priority:'.$task_id=>$priority,'closed_on:'.$task_id=>$closed_on)); 
     
     

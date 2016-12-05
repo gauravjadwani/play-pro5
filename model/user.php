@@ -118,7 +118,7 @@ return $project_details;
 
 function create_task($name,$assinged_for,$created_on,$initiator,$priority,$closed_on)
 {
-    $task_id=create_task_db($name,$assinged_for,$created_on,$association,$initiator,$priority,$closed_on);
+    $task_id=create_task_db($name,$assinged_for,$created_on,$initiator,$priority,$closed_on);
     return $task_id;
 
 }

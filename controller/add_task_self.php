@@ -15,7 +15,7 @@ $priority=$_POST['priority'];
 $closed_on='live';
 
 
-$task_id=create_task($name,$assinged_for,$created_on,$association,$initiator,$priority,$closed_on);
+$task_id=create_task($name,$assinged_for,$created_on,$initiator,$priority,$closed_on);
 
 $check=add_task_to_self($task_id,$user_id);
 
