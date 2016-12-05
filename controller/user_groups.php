@@ -4,6 +4,7 @@ include_once '../model/user.php';
 include_once '../config/session.php';
 
 $list_groups=get_list_user_groups($user_id);
+
 //print_r($list_groups);
 //exit();
 if($list_groups!='no groups')

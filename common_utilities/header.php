@@ -11,6 +11,11 @@ include_once '../config/session.php';
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+
+
+  
+
   
 <script src="https://use.fontawesome.com/9d774c759d.js"></script>
 
@@ -32,6 +37,7 @@ include_once '../config/session.php';
     <li><a href="../view/add_project.php"><span class="glyphicon glyphicon-log-in"></span>ADD PROJECT</a></li>
      <li><a href="../view/add_group.php"><span class="glyphicon glyphicon-log-in"></span> ADD_GROUP</a></li>
     <li><a href="../view/user_projects.php"><span class="glyphicon glyphicon-log-in"></span>VIEW PROJECTS</a></li>
+    <li><a href="../view/view_groups.php"><span class="glyphicon glyphicon-log-in"></span>VIEW GROUPS</a></li>
     <li><a href="../view/add_members_group.php"><span class="glyphicon glyphicon-log-in"></span>ADD MEMBERS</a></li>
         
     <li><a href="../controller/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>

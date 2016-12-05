@@ -348,6 +348,7 @@ $p=$GLOBALS['r']->zscore('group_permissions:'.$group_id,$user_id);
 function view_group_details_db($group_id)
 {
 $group_details=array();
+array_push($group_details,$group_id);
 $list=$GLOBALS['r']->hget('group','name:'.$group_id);
 array_push($group_details,$list);
 

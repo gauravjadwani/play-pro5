@@ -1,26 +1,24 @@
-
-<?php
-
-include_once '../model/user.php';
-include_once '../config/session.php';
-
-
-
-$list=list_user_projects_db($user_id);
-
-foreach($list as $project_id)
-{
-	$project_details=view_project_details($project_id);
-	//print_r($project_details);
-foreach ($project_details as$p) 
-{
-echo $p.'<br>';	# code...
-}
-
-}
-
-$v='null';
-$j=json_decode($v);
-echo $j;
-
-?>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+</head>
+<body>
+  <table id="example">
+    <thead>
+      <tr><th>Sites</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>SitePoint</td></tr>
+      <tr><td>Learnable</td></tr>
+      <tr><td>Flippa</td></tr>
+    </tbody>
+  </table>
+  <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+  <script>
+  $(function(){
+    $("#example").dataTable();
+  })
+  </script>
+</body>
+</html>
