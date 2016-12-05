@@ -14,7 +14,7 @@ $details=view_task_details_self($task);
 //array_push($details_self_tasks,$details);
 
 
- echo '<div class="alert alert-danger alert-dismissable"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$details[1].'</div>&nbsp';
+ echo '<button class="alert alert-danger alert-dismissable btn-group-justified"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$details[1].'</button>&nbsp';
 }
 }
 

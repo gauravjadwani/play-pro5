@@ -120,9 +120,9 @@ include_once '../controller/list_user_projects.php';
         <td><?php echo $d[8];?></td>
        
 
-        ?>
+      
           
-        </td>
+       
 
 
 
@@ -218,8 +218,7 @@ include_once '../controller/list_user_projects.php';
 
         ?>
           
-        </td>
-
+    
 
 
         <?php } ?>
@@ -315,7 +314,7 @@ include_once '../controller/list_user_projects.php';
 
         ?>
           
-        </td>
+       
 
 
 
