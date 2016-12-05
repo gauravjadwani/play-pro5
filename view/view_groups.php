@@ -26,7 +26,8 @@ include_once '../controller/view_groups.php';
         <th>CLOSED ON</th>
         <th>CREATED BY</th>
         <th>LIST OF PROJECTS</th>
-        <th>role<th>
+        <th>role</th>
+        <th>LIST OF MEMBERS</th>
         
       
     </thead>
@@ -93,9 +94,14 @@ include_once '../controller/view_groups.php';
           
         </td>
         <td>owner</td>
-
-
-
+          <td>
+             <?php
+           if($d[6])
+        foreach($d[6] as $mem)
+        
+           echo $mem.',';
+        ?> 
+          </td>
         <?php } ?>
       </tr>
       <?php 
@@ -165,7 +171,14 @@ include_once '../controller/view_groups.php';
           
         </td>
         <td>modifier</td>
-
+          <td>
+             <?php
+           if($d[6])
+        foreach($d[6] as $mem)
+        
+           echo $mem.',';
+        ?> 
+          </td>
 
 
         <?php } ?>
@@ -239,6 +252,14 @@ include_once '../controller/view_groups.php';
 
         <td>readonly</td>
 
+          <td>
+             <?php
+           if($d[6])
+        foreach($d[6] as $mem)
+        
+           echo $mem.',';
+        ?> 
+          </td>
 
 
         <?php } ?>

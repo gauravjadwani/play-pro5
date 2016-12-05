@@ -94,6 +94,15 @@ function view_group_details($group_id)
 
 }
 
+
+
+function list_group_members($group_id)
+{
+    $list_members=list_group_members_db($group_id);
+
+    return $list_members;
+}
+
 //----------------------------------project----------------------------------------//
 
 function create_project($name,$created_on,$desc,$deadline,$associated_group,$list_of_tasks,$closed_on,$created_by)

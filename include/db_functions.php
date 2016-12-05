@@ -367,9 +367,32 @@ $list=$GLOBALS['r']->hget('group','list_of_projects:'.$group_id);
 $list1=json_decode($list,true);
 array_push($group_details,$list1);
 
+$list=list_group_members_db($group_id);
+array_push($group_details,$list);
+
+
+
 return $group_details;
 }
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+function list_group_members_db($group_id)
+{
+
+$list_group_members=$GLOBALS['r']->zrangebyscore('group_permissions:'.$group_id,-3,3);
+return $list_group_members;
+
+//$list1=json_decode($list,true);
+
+
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ////------------------------------projects---------------------------------------------////
