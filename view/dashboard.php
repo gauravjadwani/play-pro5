@@ -2,6 +2,7 @@
 include_once '../common_utilities/header.php';
 
 
+
 ?>
 
 <div class="container">
@@ -31,8 +32,7 @@ include_once '../common_utilities/header.php';
   <ul class="list-group">
 
             <?php
-            //if(!empty($_POST['date']))
-           // require_once 'display_pending_self_tasks.php';
+           include_once '../controller/view_self_tasks.php';
             ?>
       </ul>
       

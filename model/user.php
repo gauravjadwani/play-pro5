@@ -116,7 +116,7 @@ return $project_details;
 //----------------------------------------task-----------------------------------------------//
 
 
-function create_task($name,$assinged_for,$created_on,$association,$initiator,$priority,$closed_on)
+function create_task($name,$assinged_for,$created_on,$initiator,$priority,$closed_on)
 {
     $task_id=create_task_db($name,$assinged_for,$created_on,$association,$initiator,$priority,$closed_on);
     return $task_id;
@@ -126,15 +126,35 @@ function create_task($name,$assinged_for,$created_on,$association,$initiator,$pr
 function add_task_to_self($task_id,$user_id)
 {
 
-add_task_to_self_db($task_id,$user_id);
+$check=add_task_to_self_db($task_id,$user_id);
+return $check;
 
 }
 
 
-function add_task_to_project($task_id,$project_id)
+function add_task_to_projec($task_id,$project_id)
 {
 
 add_task_to_project_db($task_id,$project_id);
 
 }
+
+function view_self_tasks($user_id)
+{
+
+$list=view_self_tasks_db($user_id);
+return $list;
+
+}
+
+function view_task_details_self($task_id)
+{
+
+$details=view_task_details_self_db($task_id);
+return $details;
+
+
+}
+
+
 ?>

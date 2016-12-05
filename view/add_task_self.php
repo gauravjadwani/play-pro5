@@ -10,7 +10,7 @@ include_once '../common_utilities/header.php';
         
         
         
-        <form action="../controllers/addtask_toself.php" method="POST">
+        <form action="../controller/add_task_self.php" method="POST">
         
 <div class="container">
     <div class="row">

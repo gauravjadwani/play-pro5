@@ -488,8 +488,10 @@ return $project_details;
                 foreach ($list_of_groups as $group_id)
                 {
             $group_details=view_group_details_db($group_id);
-                        if($group_details!='null')
-                    foreach ($group_details[4] as $projects) 
+            //print_r($group_details[5]);
+            //exit();
+                        if($group_details[5])
+                    foreach ($group_details[5] as $projects) 
                     {
                         array_push($list_projects,$projects);
                     }
@@ -509,7 +511,7 @@ return $project_details;
 
 //------------------------------------tasks--------------------------------------------------//
 
-function create_task_db($name,$assinged_for,$created_on,$association,$initiator,$priority,$closed_on)
+function create_task_db($name,$assinged_for,$created_on,$initiator,$priority,$closed_on)
 {
     $GLOBALS['r']->hsetnx('parent','task_id','1');
     $project_id=$GLOBALS['r']->hget('parent','task_id');
@@ -519,7 +521,7 @@ $GLOBALS['r']->hMset('task',array('name:'.$task_id=>$name,'assinged_for:'.$task_
      $GLOBALS['r']->hincrby('parent','task_id',1);
 
     return $task_id;
-    
+        
     
 }
 
@@ -533,6 +535,7 @@ $association='self:'.$user_id;
 $GLOBALS['r']->hset('task','association:'.$task_id,$association);
 
 add_self_task_user_list_of_tasks_db($task_id,$user_id);
+return 'true';
 }
 else
 {
@@ -548,6 +551,7 @@ function add_self_task_user_list_of_tasks_db($task_id,$user_id)
 
 
 $list=$GLOBALS['r']->hget('user','list_of_tasks_self:'.$user_id);
+$task_details=view_task_details_self_db($task_id);
     if($list!='null')
     {
       
@@ -563,7 +567,10 @@ $list=$GLOBALS['r']->hget('user','list_of_tasks_self:'.$user_id);
         $list_jsonencode=json_encode($list_jsondeocde);
         
         $GLOBALS['r']->hset('user','list_of_tasks_self:'.$user_id,$list_jsonencode);
+
         
+
+user_set_notifications_db($user_id,$current_time,'you created the self task name '.$task_details[1].' on  '.$created_on.' for date:'.$task_details[7].' priority :'.$task_details[6]);
         
     }
     else
@@ -577,6 +584,7 @@ $list=$GLOBALS['r']->hget('user','list_of_tasks_self:'.$user_id);
         //$list=array($group_id);
         //$list_jsonencode=json_encode($d);
     $GLOBALS['r']->hset('user','list_of_tasks_self:'.$user_id,$j);
+    user_set_notifications_db($user_id,$current_time,'you created the self task name '.$task_details[1].' on for date:'.$task_details[7].' priority :'.$task_details[6]);
         
     }
     }
@@ -625,6 +633,8 @@ $list=$GLOBALS['r']->hget('project','list_of_tasks:'.$project_id);
         
         $GLOBALS['r']->hset('project','list_of_tasks:'.$project_id,$list_jsonencode);
         
+
+        
         
     }
     else
@@ -643,13 +653,57 @@ $list=$GLOBALS['r']->hget('project','list_of_tasks:'.$project_id);
     }
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
     
+    function view_task_details_self_db($task_id)
+{
+ 
 
 
+    $task_details=array();
+    array_push($task_details,$task_id);
+$list=$GLOBALS['r']->hget('task','name:'.$task_id);
+array_push($task_details,$list);
+
+$list=$GLOBALS['r']->hget('task','assinged_for:'.$task_id);
+array_push($task_details,$list);
+
+$list=$GLOBALS['r']->hget('task','created_on:'.$task_id);
+array_push($task_details,$list);
 
 
+$list=$GLOBALS['r']->hget('task','association:'.$task_id);
+//$list1=json_decode($list,true);
+array_push($task_details,$list);
 
+
+$list=$GLOBALS['r']->hget('task','initiator:'.$task_id);
+array_push($task_details,$list);
+
+
+$list=$GLOBALS['r']->hget('task','priority:'.$task_id);
+array_push($task_details,$list);
+
+$list=$GLOBALS['r']->hget('task','closed_on:'.$task_id);
+array_push($task_details,$list);
+
+
+return $task_details;
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+function view_self_tasks_db($user_id)
+{
+$list_tasks_self=$GLOBALS['r']->hget('user','list_of_tasks_self:'.$user_id);
+
+$list=json_decode($list_tasks_self,true);
+if($list)
+return $list;
+else
+return 'no tasks';
+
+}
 
       
 

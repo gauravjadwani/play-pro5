@@ -10,7 +10,7 @@ include_once '../common_utilities/header.php';
         <div class="row">
             
             <div class="col-md-6">
-                <a href="addtask_toself.php"><button type="button" class="btn btn-primary btn-block">task for self</button></a>
+                <a href="add_task_self.php"><button type="button" class="btn btn-primary btn-block">task for self</button></a>
                 
                 </div>
             <div class="col-md-6">
