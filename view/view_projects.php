@@ -34,302 +34,63 @@ include_once '../controller/list_user_projects.php';
     
 
     </thead>
-    <tbody>
-        
-      <?php
+
+    <tfoot>
+            <tr>
+               <th>ID</th>
+        <th>NAME</th>
+        <th>CREATED ON</th>
+        <th>DESC</th>
+        <th>DEADLINE</th>
+        <th>ASSOCIATED_GROUP</th>
+        <th>LIST OF TASKS</th>
+        <th>CLOSED ON</th>
+        <th>CREATED BY</th>
+            </tr>
+        </tfoot>
+
+          <?php
+
+              $arr=array($list_project_modifier_details,$list_project_owner_details,$list_project_readonly_details);
 
 
-      if($list_project_owner_details)
-      {
+              for ($i=0; $i <sizeof($arr) ; $i++) 
+              { 
+                
+                if($arr[$i])
+               foreach($arr[$i] as $key)
+               {
 
-      foreach($list_project_owner_details as $d)
-      {
-          echo '<tr>';
-
-        
-      
-
-
-      
-
-
-      ?>
-    
-        <td><?php echo $d[0];
-        
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[1];
-      
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[2];
-     
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[4];
-    
-
-        ?>
-          
-        </td>
-
-      
+                echo '<tr>';
+                foreach($key as $data)
+                {
+                  echo '<td>';
+                  if(is_array($data))
+                  {
+                      foreach($data as $d)
+                      echo $d.',';
+                  }
+                  else
+                  {
+                      echo $data;
+                  }
+                  
+                  
+                  echo '</td>';
 
 
-        
+                }
+                echo '</tr>';
+               }
 
-        <td><?php echo $d[3];
+
+              }
 
 
-        ?>
-          
-        </td>
-
-        
-        <td><?php
-        echo($d[5]);
-       
-        
-        
-        ?>
-          
-        </td>
-          
-        <td><?php
-       
-        if($d[6])
-        foreach($d[6] as $pro)
-        
-
-            echo $pro.',';
           ?>
-        </td>
 
 
-        <td><?php echo $d[7];?>
-        
-
-        </td>
-        <td><?php echo $d[8];?></td>
-       
-
-      
-          
-       
-
-
-
-        <?php } ?>
-      </tr>
-      <?php 
-      }
-      
-      ?>
-<?php
-
-
-      if($list_project_modifier_details)
-      {
-
-      foreach($list_project_modifier_details as $d)
-      {
-          echo '<tr>';
-
-        
-      
-
-
-      
-
-
-      ?>
     
-        <td><?php echo $d[0];
-        
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[1];
-      
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[2];
-     
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[4];
-    
-
-        ?>
-          
-        </td>
-
-      
-
-
-        
-
-        <td><?php echo $d[3];
-
-
-        ?>
-          
-        </td>
-
-        
-        <td><?php
-        echo($d[5]);
-       
-        
-        
-        ?>
-          
-        </td>
-          
-        <td><?php
-       
-        if($d[6])
-        foreach($d[6] as $pro)
-        
-
-            echo $pro.',';
-          ?>
-        </td>
-
-
-        <td><?php echo $d[7];?>
-        
-
-        </td>
-        <td><?php echo $d[8];?></td>
-       
-
-        ?>
-          
-    
-
-
-        <?php } ?>
-      </tr>
-      <?php 
-      }
-      
-      ?>
-
-      <?php
-
-
-      if($list_project_readonly_details)
-      {
-
-      foreach($list_project_readonly_details as $d)
-      {
-          echo '<tr>';
-
-        
-      
-
-
-      
-
-
-      ?>
-    
-        <td><?php echo $d[0];
-        
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[1];
-      
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[2];
-     
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[4];
-    
-
-        ?>
-          
-        </td>
-
-      
-
-
-        
-
-        <td><?php echo $d[3];
-
-
-        ?>
-          
-        </td>
-
-        
-        <td><?php
-        echo($d[5]);
-       
-        
-        
-        ?>
-          
-        </td>
-          
-        <td><?php
-       
-        if($d[6])
-        foreach($d[6] as $pro)
-        
-
-            echo $pro.',';
-          ?>
-        </td>
-
-
-        <td><?php echo $d[7];?>
-        
-
-        </td>
-        <td><?php echo $d[8];?></td>
-       
-
-        ?>
-          
-       
-
-
-
-        <?php } ?>
-      </tr>
-      <?php 
-      }
-      
-      ?>
-
-    </tbody>
-  </table>
-  </div>
-</div>
-
 
     
     

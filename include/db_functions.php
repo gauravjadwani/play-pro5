@@ -5,6 +5,20 @@
 include_once '../config/config.php';
 
 //-------------------user----------------------------------------------------------------//
+
+function jsonencode_data($data)
+{
+
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////
+function jsondecode_data($data)
+{
+
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
 function create_user_db($email,$name,$mobile,$password,$current_time)
 {
       $GLOBALS['r']->hsetnx('parent','user_id','1');
@@ -27,7 +41,7 @@ function create_user_db($email,$name,$mobile,$password,$current_time)
      //$current_time=time();
     
     
-    $check=$GLOBALS['r']->hMset('user', array('name:'.$user_id =>$name, 'mobile:'.$user_id =>$mobile,'email:'.$user_id=>$email,'password_hash:'.$user_id=>$hashed_password,'timestamp:'.$user_id=>$current_time,'list_of_groups:'.$user_id=>'null','list_of_tasks_self:'.$user_id=>'null','list_of_notifications:'.$user_id=>'null')); 
+    $check=$GLOBALS['r']->hMset('user', array('name:'.$user_id =>$name, 'mobile:'.$user_id =>$mobile,'email:'.$user_id=>$email,'password_hash:'.$user_id=>$hashed_password,'timestamp:'.$user_id=>$current_time,'list_of_groups:'.$user_id=>'nil','list_of_tasks_self:'.$user_id=>'nil','list_of_notifications:'.$user_id=>'nil')); 
     
     $GLOBALS['r']->zadd("state:user",1,$user_id);
     
@@ -66,7 +80,7 @@ function user_set_notifications_db($user_id,$current_time,$value)
     
 //$GLOBALS['r']->zadd("notifications:".$user_id,$current_time,$value);
     $check_noti= $GLOBALS['r']->hget("user",'list_of_notifications:'.$user_id);
-    if($check_noti=='null')
+    if($check_noti=='nil')
     {
         $d=array();
         $p=array($value,$current_time);
@@ -95,7 +109,7 @@ function user_get_notifications_db($user_id)
     
 //$GLOBALS['r']->zadd("notifications:".$user_id,$current_time,$value);
     $list_noti=$GLOBALS['r']->hget("user",'list_of_notifications:'.$user_id);
-    if($list_noti=='null')
+    if($list_noti=='nil')
     {
         return false;
     }
@@ -229,7 +243,7 @@ function create_group_db($name,$created_on,$closed_on,$created_by,$list_of_proje
 function add_group_to_user_list_of_groups_db($user_id,$group_id)
 {
     $list=$GLOBALS['r']->hget('user','list_of_groups:'.$user_id);
-    if($list!='null')
+    if($list!='nil')
     {
       
         
@@ -266,7 +280,7 @@ function add_group_to_user_list_of_groups_db($user_id,$group_id)
 //2 is for modifier,3 is for read-only,1 is for the owner
 function set_permissions_for_group_db($group_id,$list_of_email,$token)
 {
-    $value1='null';
+    $value1='nil';
     $group_name=$GLOBALS['r']->hget('group','name:'.$group_id);
     $split_email=split(",",$list_of_email);
     
@@ -314,7 +328,7 @@ function set_permissions_for_group_db($group_id,$list_of_email,$token)
 function get_list_user_groups_db($user_id)
 {
 $list=$GLOBALS['r']->hget('user','list_of_groups:'.$user_id);
-    if($list!='null')
+    if($list!='nil')
     {
     $list_jsondeocde=json_decode($list,true);
     return $list_jsondeocde;
@@ -371,7 +385,8 @@ $list=list_group_members_db($group_id);
 array_push($group_details,$list);
 
 
-
+/*print_r($group_details);
+exit();*/
 return $group_details;
 }
 
@@ -384,7 +399,12 @@ function list_group_members_db($group_id)
 {
 
 $list_group_members=$GLOBALS['r']->zrangebyscore('group_permissions:'.$group_id,-3,3);
+
+
+/*print_r($list_group_members);
+exit();*/
 return $list_group_members;
+
 
 //$list1=json_decode($list,true);
 
@@ -421,12 +441,14 @@ function add_project_list_group($project_id,$group_id)
 {
 
 $list=$GLOBALS['r']->hget('group','list_of_projects:'.$group_id);
-    if($list!='null')
+    if($list!='"nil"')
     {
-      
+        //echo 'gaiuddddra';
+      //exit();
         
         $list_jsondeocde=json_decode($list,true);
-        
+        //var_dump($list_jsondeocde);
+        //exit();
          //$d=array();
         //$list=array($group_id);
         //array_merge(array1)($list_jsondeocde,$list);
@@ -481,9 +503,11 @@ array_push($project_details,$list);
 
 $list=$GLOBALS['r']->hget('project','list_of_tasks:'.$project_id);
 
+print_r($list);
 $list1=json_decode($list,true);
-//var_dump($list1);
-//exit();
+
+// print_r($list1);
+// exit();
 array_push($project_details,$list1);
 
 $list=$GLOBALS['r']->hget('project','closed_on:'.$project_id);
@@ -492,7 +516,7 @@ array_push($project_details,$list);
 $list=$GLOBALS['r']->hget('project','created_by:'.$project_id);
 array_push($project_details,$list);
 
-
+//print_r($project_details);
 return $project_details;
 
 
@@ -511,35 +535,55 @@ return $project_details;
         $details=view_user_details_db($user_id);
 
         $list_of_groups=$details[3];
-        //var_dump($list_of_groups);
-        //exit();
-                    if($list_of_groups!=null)
+         if($list_of_groups!='"nil"')
+                    {
+
                 foreach ($list_of_groups as $group_id)
                 {
             $group_details=view_group_details_db($group_id);
-            //print_r($group_details[5]);
-            //exit();
-                        if($group_details[5])
+          /* print_r($group_details);*/
+        
+                        //var_dump($group_details[5]);
+                        if(is_array($group_details[5]))
+                        {
                     foreach ($group_details[5] as $projects) 
-                    {
                         array_push($list_projects,$projects);
-                    }
+                        }
+                        else
+                        {
+                            array_push($list_projects,'nil');
+                        }
+
+                    
 
 
                 }
+            }
+           
 
                 return $list_projects;
     }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+function check_user_permission_for_project_db($project_id,$user_id)
+{
+    $project_details=view_project_details_db($project_id);
+$associated_group=$project_details[5];
+$p=$GLOBALS['r']->zscore('group_permissions:'.$associated_group,$user_id);
+    
+    
+            if($p==1)
+            return 'o';
+       elseif($p==2)    
+            return 'm';
+       elseif($p==3)
+            return 'r';
+        else 
+            return 'user_permission for project not found';
 
-    /*function view_user_projects($user_id)
-    {
-        list_of_groups=$
+        //exit();
 
-    }
-*/
-
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -553,7 +597,7 @@ function create_task_db($name,$assinged_for,$created_on,$initiator,$priority,$cl
     //exit();
     $GLOBALS['r']->hsetnx('parent','task_id','1');
     $task_id=$GLOBALS['r']->hget('parent','task_id');
-$GLOBALS['r']->hMset('task',array('name:'.$task_id=>$name,'assinged_for:'.$task_id=>$assinged_for,'created_on:'.$task_id=>$created_on,'association:'.$task_id=>'null','initiator:'.$task_id=>$initiator,'priority:'.$task_id=>$priority,'closed_on:'.$task_id=>$closed_on)); 
+$GLOBALS['r']->hMset('task',array('name:'.$task_id=>$name,'assinged_for:'.$task_id=>$assinged_for,'created_on:'.$task_id=>$created_on,'association:'.$task_id=>'"nil"','initiator:'.$task_id=>$initiator,'priority:'.$task_id=>$priority,'closed_on:'.$task_id=>$closed_on)); 
     
     
      $GLOBALS['r']->hincrby('parent','task_id',1);
@@ -567,7 +611,7 @@ function add_task_to_self_db($task_id,$user_id)
 {
 
 $check=$GLOBALS['r']->hget('task','association:'.$task_id);
-if($check=='null')
+if($check=='nil')
 {
 $association='self:'.$user_id;
 $GLOBALS['r']->hset('task','association:'.$task_id,$association);
@@ -590,7 +634,7 @@ function add_self_task_user_list_of_tasks_db($task_id,$user_id)
 
 $list=$GLOBALS['r']->hget('user','list_of_tasks_self:'.$user_id);
 $task_details=view_task_details_self_db($task_id);
-    if($list!='null')
+    if($list!='nil')
     {
       
         
@@ -633,7 +677,7 @@ user_set_notifications_db($user_id,$current_time,'you created the self task name
 
 
 $check=$GLOBALS['r']->hget('task','association:'.$task_id);
-if($check=='null')
+if($check=='nil')
 {
 $association='project:'.$project_id;
 $GLOBALS['r']->hset('task','association:'.$task_id,$association);
@@ -656,7 +700,7 @@ else
 
 
 $list=$GLOBALS['r']->hget('project','list_of_tasks:'.$project_id);
-    if($list!='null')
+    if($list!='nil')
     {
       
         

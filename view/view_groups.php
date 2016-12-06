@@ -26,251 +26,51 @@ include_once '../controller/view_groups.php';
         <th>CLOSED ON</th>
         <th>CREATED BY</th>
         <th>LIST OF PROJECTS</th>
-        <th>role</th>
+        
         <th>LIST OF MEMBERS</th>
+        <th>role</th>
         
       
     </thead>
     <tbody>
         
       <?php
-
-      if(!empty($list_owner_details))
-      {
-
-      foreach($list_owner_details as $d)
-      {
-          echo '  <tr>';
-
-        
-      
+$arr=array($list_owner_details,$list_modifier_details,$list_readonly_details);
 
 
-      
+              for ($i=0; $i <sizeof($arr) ; $i++) 
+              { 
+                
+              
+               foreach($arr[$i] as $key)
+               {
+                    echo '<tr>';
+                    foreach($key as $k)
+                    {
+                        echo '<td>';
+                      if(is_array($k))
+                        {
+                          foreach($k as $k1)
+                          echo $k1.',';
+                        }
+                        else
+                          echo $k;
+                        
+
+                    }
+                    if($i==0)$n='owner';elseif($i==1)$n='modifier';elseif($i==2)$n='readonly';
+                        echo '</td>';
+                        print '<td>'.$n.'</td>';
+                      
+                   }
+
+                  }
+
+                
 
 
-      ?>
-    
-        <td><?php echo $d[0];
-        //print_r($k);
 
-        ?>
-          
-        </td>
-        <td><?php echo $d[1];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[2];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[3];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-
-
-        <td><?php echo $d[4];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-
-
-        <td><?php
-           if($d[5])
-        foreach($d[5] as $pro)
-        
-           echo $pro.',';
-        ?>
-          
-        </td>
-        <td>owner</td>
-          <td>
-             <?php
-           if($d[6])
-        foreach($d[6] as $mem)
-        
-           echo $mem.',';
-        ?> 
-          </td>
-        <?php } ?>
-      </tr>
-      <?php 
-      }
-      
-      ?>
-
-<?php
-
-      if(!empty($list_modifier_details))
-      {
-
-      foreach($list_modifier_details as $d)
-      {
-          echo '  <tr>';
-
-        
-      
-
-
-      
-
-
-      ?>
-    
-        <td><?php echo $d[0];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[1];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[2];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[3];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-
-
-        <td><?php echo $d[4];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-
-
-        <td><?php
-
-        foreach($d[5] as $pro)
-        
-
-            echo $pro.',';
-        ?>
-          
-        </td>
-        <td>modifier</td>
-          <td>
-             <?php
-           if($d[6])
-        foreach($d[6] as $mem)
-        
-           echo $mem.',';
-        ?> 
-          </td>
-
-
-        <?php } ?>
-      </tr>
-      <?php 
-      }
-      
-      ?>
-      
-
-      <?php
-
-      if(!empty($list_readonly_details))
-      {
-
-      foreach($list_readonly_details as $d)
-      {
-          echo '  <tr>';
-
-        
-      
-
-
-      
-
-
-      ?>
-    
-        <td><?php echo $d[0];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[1];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[2];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-        <td><?php echo $d[3];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-
-
-        <td><?php echo $d[4];
-        //print_r($k);
-
-        ?>
-          
-        </td>
-
-
-        <td><?php
-
-        foreach($d[5] as $pro)
-       
-            echo $pro.',';
-        ?>
-          
-        </td>
-
-        <td>readonly</td>
-
-          <td>
-             <?php
-           if($d[6])
-        foreach($d[6] as $mem)
-        
-           echo $mem.',';
-        ?> 
-          </td>
-
-
-        <?php } ?>
-      </tr>
-      <?php 
-      }
-      
-      ?>
-      
-
-
+?>
 
     </tbody>
   </table>

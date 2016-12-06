@@ -23,7 +23,7 @@ include_once '../controller/user_groups.php';
                
                 <div class="form-group">
     
-    <input class="form-control input-lg" name="name_of_the_project" type="text" placeholder="name of the project">
+    <input class="form-control input-lg" name="name_of_the_project" type="text" placeholder="name of the project" required>
                 </div>
                
         </div>  
@@ -82,7 +82,7 @@ include_once '../controller/user_groups.php';
             <div class="form-group">
       <div class="col-md-3" style="font-size: 200%;color:purple">DESC</div>
       <div class="col-md-9">
-      <textarea class="form-control" rows="3" name="desc" placeholder="Description for the project"></textarea>
+      <textarea class="form-control" rows="3" name="desc" placeholder="Description for the project"></textarea required>
     </div>
                 
       </div></div>
@@ -96,7 +96,7 @@ include_once '../controller/user_groups.php';
                 <div class="col-md-9">
                     
            
-           <input type="date" name="deadline" class="form-control">&nbsp&nbsp&nbsp
+           <input type="date" name="deadline" class="form-control" required>&nbsp&nbsp&nbsp
          
             </div>
                

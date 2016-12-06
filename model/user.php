@@ -121,6 +121,13 @@ function view_project_details($project_id)
 $project_details=view_project_details_db($project_id);
 return $project_details;
 }
+function check_user_permission_for_project($project_id,$user_id)
+{
+$permission=check_user_permission_for_project_db($project_id,$user_id);
+return $permission;
+
+
+}
 
 //----------------------------------------task-----------------------------------------------//
 

@@ -54,5 +54,6 @@ foreach ($list_modifier as $group)
 //print_r($list_readonly_details);
 //print_r($list_owner_details);
 //print_r($list_modifier_details);
-
+/*
+print_r($list_owner_details);*/
 ?>

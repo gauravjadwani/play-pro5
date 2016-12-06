@@ -12,14 +12,14 @@ include_once '../common_utilities/header.php';
                     <hr>
                     <div class="<form-group">
                         
-                        <input class="form-control input-lg" name="name_of_group" type="text" placeholder="name of the group">
+                        <input class="form-control input-lg" name="name_of_group" type="text" placeholder="name of the group" required>
                         &nbsp
       <textarea class="form-control" rows="3" name="list_members_modify" placeholder="MODIFY-members accociated with the project seperate them with the ,"></textarea>
     </div>
                     &nbsp
                     <div class="form-group">
                         
-      <textarea class="form-control" rows="3" name="list_members_readonly" placeholder="READ ONLY-members accociated with the project seperate them with the ,"></textarea>
+      <textarea class="form-control" rows="3" name="list_members_readonly" placeholder="READ ONLY-members accociated with the project seperate them with the ," ></textarea>
     </div>
    
                     <button type="submit" class="btn btn-default">Submit</button>
