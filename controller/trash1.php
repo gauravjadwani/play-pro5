@@ -1,9 +1,8 @@
 
+
 <?php
 include_once '../common_utilities/header.php';
-include_once '../controller/list_user_projects.php';
-
-
+include_once '../controller/view_groups.php';
 
 ?>
   
@@ -17,31 +16,32 @@ include_once '../controller/list_user_projects.php';
   
       
     <div class="table-responsive">
+    <h2>GROUPS</h2>
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
         <th>ID</th>
         <th>NAME</th>
         <th>CREATED ON</th>
-        <th>DESC</th>
-        <th>DEADLINE</th>
-        <th>ASSOCIATED_GROUP</th>
-        <th>LIST OF TASKS</th>
         <th>CLOSED ON</th>
         <th>CREATED BY</th>
+        <th>LIST OF PROJECTS</th>
+        
+        <th>LIST OF MEMBERS</th>
+        <th>role</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-        <th>ID</th>
+       <th>ID</th>
         <th>NAME</th>
         <th>CREATED ON</th>
-        <th>DESC</th>
-        <th>DEADLINE</th>
-        <th>ASSOCIATED_GROUP</th>
-        <th>LIST OF TASKS</th>
         <th>CLOSED ON</th>
         <th>CREATED BY</th>
+        <th>LIST OF PROJECTS</th>
+        
+        <th>LIST OF MEMBERS</th>
+        <th>role</th>
             </tr>
         </tfoot>
     <tbody>
@@ -49,44 +49,42 @@ include_once '../controller/list_user_projects.php';
   
 
           <?php
-
-              $arr=array($list_project_modifier_details,$list_project_owner_details,$list_project_readonly_details);
+$arr=array($list_owner_details,$list_modifier_details,$list_readonly_details);
 
 
               for ($i=0; $i <sizeof($arr) ; $i++) 
               { 
                 
-                if($arr[$i])
+              
                foreach($arr[$i] as $key)
                {
+                    echo '<tr>';
+                    foreach($key as $k)
+                    {
+                        echo '<td>';
+                      if(is_array($k))
+                        {
+                          foreach($k as $k1)
+                          echo $k1.',';
+                        }
+                        else
+                          echo $k;
+                        
 
-                echo '<tr>';
-                foreach($key as $data)
-                {
-                  echo '<td>';
-                  if(is_array($data))
-                  {
-                      foreach($data as $d)
-                      echo $d.',';
+                    }
+                    if($i==0)$n='owner';elseif($i==1)$n='modifier';elseif($i==2)$n='readonly';
+                        echo '</td>';
+                        print '<td>'.$n.'</td>';
+                      
+                   }
+
                   }
-                  else
-                  {
-                      echo $data;
-                  }
-                  
-                  
-                  echo '</td>';
+
+                
 
 
-                }
-                echo '</tr>';
-               }
 
-
-              }
-
-
-          ?>
+?>
 
 
            
