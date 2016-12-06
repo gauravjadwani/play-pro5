@@ -1,308 +1,118 @@
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">play-BETA</a>
+    </div>
+      
+      
+    <ul class="nav navbar-nav navbar-right">
+      
+      
+    <li><a href="../view/sign_up.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Signup</a></li>
+    
+    </ul>
+      
+    
+  </div>
+</nav>
+  
+<div class="container">
+  
+
+<?php
+if(true)
+{
+  ?>
+<div data-toggle="modal" data-target="modalRegister">
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+
+
+    $(window).load(function(){
+        $('#myModal').modal('show');
+    });
+</script>
 
 
 <?php
-include_once '../common_utilities/header.php';
-include_once '../controller/view_groups.php';
+}
+
 
 ?>
-  
-  <body>
-<div class="container">
-    <div class="row">
-        
-  
-
-  
-  
-      
-    <div class="table-responsive">
-    <h2>GROUPS</h2>
-<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-        <th>ID</th>
-        <th>NAME</th>
-        <th>CREATED ON</th>
-        <th>CLOSED ON</th>
-        <th>CREATED BY</th>
-        <th>LIST OF PROJECTS</th>
-        
-        <th>LIST OF MEMBERS</th>
-        <th>role</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-       <th>ID</th>
-        <th>NAME</th>
-        <th>CREATED ON</th>
-        <th>CLOSED ON</th>
-        <th>CREATED BY</th>
-        <th>LIST OF PROJECTS</th>
-        
-        <th>LIST OF MEMBERS</th>
-        <th>role</th>
-            </tr>
-        </tfoot>
-    <tbody>
-        
-  
-
-          <?php
-$arr=array($list_owner_details,$list_modifier_details,$list_readonly_details);
 
 
-              for ($i=0; $i <sizeof($arr) ; $i++) 
-              { 
-                
+  <div class="row">
+
+
+
+      <div class="col-md-3">
+          </div>
+      <div class="col-md-6">
+          <form class = "form-horizontal" role = "form" action="../controller/user_login.php" method="post">
+   
+   <div class = "form-group">
+      <label for = "email" class = "col-sm-2 control-label">USER_ID</label>
+    
+      <div class = "col-sm-10">
+         <input type = "number" class = "form-control" name = "id" placeholder ="Enter Email" required>
+      </div>
+   </div>
+   <div class = "form-group">
+      <label for = "passwd" class = "col-sm-2 control-label">Password</label>
+    
+      <div class = "col-sm-10">
+         <input type = "password" class = "form-control" name = "passwd" placeholder ="Enter Password" required>
+      </div>
+   </div>
+     <div class = "form-group">
+      <div class = "col-sm-offset-2 col-sm-10">
+         <button type = "submit" class = "btn btn-default">Log   in</button>
+      </div>
+   </div>
+        
               
-               foreach($arr[$i] as $key)
-               {
-                    echo '<tr>';
-                    foreach($key as $k)
-                    {
-                        echo '<td>';
-                      if(is_array($k))
-                        {
-                          foreach($k as $k1)
-                          echo $k1.',';
-                        }
-                        else
-                          echo $k;
-                        
-
-                    }
-                    if($i==0)$n='owner';elseif($i==1)$n='modifier';elseif($i==2)$n='readonly';
-                        echo '</td>';
-                        print '<td>'.$n.'</td>';
-                      
-                   }
-
-                  }
-
-                
-
-
-
-?>
-
-
-           
-      
-    </tbody>
-  </table>
-  </div>
+</form>
+          
+          
+          </div>
+      <div class="col-md-3">
+      </div>
+              
+</div>
 </div>
 
-
-    
-    
-   
-    <script>
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
-</script>
 </body>
-
-
-</html> 
-        
-   
-
-      
-
-
-        
-
-        
-
-
-        
-          
-        
-
-        
-       
-        
-       
-        
-        
-       
-          
-        
-          
-        
-       
-        
-        
-        
-
-            
-         
-        
-
-
-        
-        
-
-        
-       
-       
-
-      
-          
-       
-
-
-
-       
-      
-      
-     
-     
-        
-
-        
-          
-        
-        
-      
-
-       
-          
-        
-        
-     
-
-       
-          
-       
-       
-    
-
-        
-          
-       
-
-      
-
-
-        
-
-      
-
-
-       
-          
-        
-
-        
-        
-        
-       
-        
-        
-        
-          
-        
-          
-        
-       
-        
-        
-        
-
-            
-         
-        
-
-
-          
-        
-
-        
-        
-       
-
-        
-          
-    
-
-
-       
-
-        
-      
-
-
-      
-
-
-
-        
-        
-     
-
-        
-          
-        
-        
-    
-
-        
-          
-        
-
-      
-
-
-        
-
-        
-
-
-        
-          
-        
-
-        
-        
-        
-       
-        
-        
-        
-          
-        
-          
-        
-       
-        
-      
-        
-
-            
-          
-        
-
-
-        
-        
-
-        
-       
-       
-
-      
-          
-       
-
-
-
-       
-
-      
-      
-      
-     
+</html>
