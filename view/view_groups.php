@@ -1,25 +1,25 @@
 
+
 <?php
 include_once '../common_utilities/header.php';
 include_once '../controller/view_groups.php';
 
 ?>
-  <html>
-  <head>
-
-  <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
-  </head>
+  
   <body>
 <div class="container">
     <div class="row">
         
   
-  <h2>VIEW YOUR GROUPS </h2>
+
   
-  <div class="table-responsive">
-  <table class="table" id='example'>
+  
       
-    <thead>
+    <div class="table-responsive">
+    <h2>GROUPS</h2>
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
         <th>ID</th>
         <th>NAME</th>
         <th>CREATED ON</th>
@@ -29,12 +29,26 @@ include_once '../controller/view_groups.php';
         
         <th>LIST OF MEMBERS</th>
         <th>role</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+       <th>ID</th>
+        <th>NAME</th>
+        <th>CREATED ON</th>
+        <th>CLOSED ON</th>
+        <th>CREATED BY</th>
+        <th>LIST OF PROJECTS</th>
         
-      
-    </thead>
+        <th>LIST OF MEMBERS</th>
+        <th>role</th>
+            </tr>
+        </tfoot>
     <tbody>
         
-      <?php
+  
+
+          <?php
 $arr=array($list_owner_details,$list_modifier_details,$list_readonly_details);
 
 
@@ -72,6 +86,9 @@ $arr=array($list_owner_details,$list_modifier_details,$list_readonly_details);
 
 ?>
 
+
+           
+      
     </tbody>
   </table>
   </div>
@@ -80,17 +97,212 @@ $arr=array($list_owner_details,$list_modifier_details,$list_readonly_details);
 
     
     
-    </div>
-    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
-  <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-  <script>
-       <script>
-       $(function(){
-    $("#example").dataTable();
-  })
-  </script>
+   
+    <script>
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
 </body>
 
 
-</html>
+</html> 
+        
+   
 
+      
+
+
+        
+
+        
+
+
+        
+          
+        
+
+        
+       
+        
+       
+        
+        
+       
+          
+        
+          
+        
+       
+        
+        
+        
+
+            
+         
+        
+
+
+        
+        
+
+        
+       
+       
+
+      
+          
+       
+
+
+
+       
+      
+      
+     
+     
+        
+
+        
+          
+        
+        
+      
+
+       
+          
+        
+        
+     
+
+       
+          
+       
+       
+    
+
+        
+          
+       
+
+      
+
+
+        
+
+      
+
+
+       
+          
+        
+
+        
+        
+        
+       
+        
+        
+        
+          
+        
+          
+        
+       
+        
+        
+        
+
+            
+         
+        
+
+
+          
+        
+
+        
+        
+       
+
+        
+          
+    
+
+
+       
+
+        
+      
+
+
+      
+
+
+
+        
+        
+     
+
+        
+          
+        
+        
+    
+
+        
+          
+        
+
+      
+
+
+        
+
+        
+
+
+        
+          
+        
+
+        
+        
+        
+       
+        
+        
+        
+          
+        
+          
+        
+       
+        
+      
+        
+
+            
+          
+        
+
+
+        
+        
+
+        
+       
+       
+
+      
+          
+       
+
+
+
+       
+
+      
+      
+      
+     

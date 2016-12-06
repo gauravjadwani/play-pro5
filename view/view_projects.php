@@ -6,22 +6,21 @@ include_once '../controller/list_user_projects.php';
 
 
 ?>
-  <html>
-  <head>
-
-  <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
-  </head>
+  
   <body>
 <div class="container">
     <div class="row">
         
   
-  <h2>VIEW YOUR PROJECTS</h2>
+
   
-  <div class="table-responsive">
-  <table class="table" id='example'>
+  
       
-    <thead>
+    <div class="table-responsive">
+    <h2>PROJECTS</h2>
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
         <th>ID</th>
         <th>NAME</th>
         <th>CREATED ON</th>
@@ -31,13 +30,11 @@ include_once '../controller/list_user_projects.php';
         <th>LIST OF TASKS</th>
         <th>CLOSED ON</th>
         <th>CREATED BY</th>
-    
-
-    </thead>
-
-    <tfoot>
+            </tr>
+        </thead>
+        <tfoot>
             <tr>
-               <th>ID</th>
+        <th>ID</th>
         <th>NAME</th>
         <th>CREATED ON</th>
         <th>DESC</th>
@@ -48,6 +45,9 @@ include_once '../controller/list_user_projects.php';
         <th>CREATED BY</th>
             </tr>
         </tfoot>
+    <tbody>
+        
+  
 
           <?php
 
@@ -90,21 +90,222 @@ include_once '../controller/list_user_projects.php';
           ?>
 
 
-    
+           
+      
+    </tbody>
+  </table>
+  </div>
+</div>
+
 
     
     
-    </div>
-    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
-  <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-  <script>
-       <script>
-       $(function(){
-    $("#example").dataTable();
-  })
-  </script>
+   
+    <script>
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
 </body>
 
 
-</html>
+</html> 
+        
+   
 
+      
+
+
+        
+
+        
+
+
+        
+          
+        
+
+        
+       
+        
+       
+        
+        
+       
+          
+        
+          
+        
+       
+        
+        
+        
+
+            
+         
+        
+
+
+        
+        
+
+        
+       
+       
+
+      
+          
+       
+
+
+
+       
+      
+      
+     
+     
+        
+
+        
+          
+        
+        
+      
+
+       
+          
+        
+        
+     
+
+       
+          
+       
+       
+    
+
+        
+          
+       
+
+      
+
+
+        
+
+      
+
+
+       
+          
+        
+
+        
+        
+        
+       
+        
+        
+        
+          
+        
+          
+        
+       
+        
+        
+        
+
+            
+         
+        
+
+
+          
+        
+
+        
+        
+       
+
+        
+          
+    
+
+
+       
+
+        
+      
+
+
+      
+
+
+
+        
+        
+     
+
+        
+          
+        
+        
+    
+
+        
+          
+        
+
+      
+
+
+        
+
+        
+
+
+        
+          
+        
+
+        
+        
+        
+       
+        
+        
+        
+          
+        
+          
+        
+       
+        
+      
+        
+
+            
+          
+        
+
+
+        
+        
+
+        
+       
+       
+
+      
+          
+       
+
+
+
+       
+
+      
+      
+      
+     
