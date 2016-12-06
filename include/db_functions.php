@@ -503,7 +503,7 @@ array_push($project_details,$list);
 
 $list=$GLOBALS['r']->hget('project','list_of_tasks:'.$project_id);
 
-print_r($list);
+//print_r($list);
 $list1=json_decode($list,true);
 
 // print_r($list1);
