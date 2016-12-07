@@ -76,7 +76,7 @@ $arr=array($list_owner_details,$list_modifier_details,$list_readonly_details);
                     if($i==0)$n='owner';elseif($i==1)$n='modifier';elseif($i==2)$n='readonly';
                         echo '</td>';
                         print '<td>'.$n.'</td>';
-                      
+                      echo '</tr>';
                    }
 
                   }
