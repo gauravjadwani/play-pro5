@@ -5,9 +5,12 @@ include_once '../config/session.php';
 
 $list_tasks=view_self_tasks_db($user_id);
 
-if($list_tasks!='no tasks')
+if($list_tasks!='nil')
 {
 	//$details_self_tasks=array();
+
+	/*var_dump($list_tasks);
+	exit();*/
 foreach($list_tasks as $task)
 {
 $details=view_task_details_self($task);

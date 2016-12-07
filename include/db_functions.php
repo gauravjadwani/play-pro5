@@ -827,10 +827,15 @@ function view_self_tasks_db($user_id)
 $list_tasks_self=$GLOBALS['r']->hget('user','list_of_tasks_self:'.$user_id);
 
 $list=json_decode($list_tasks_self,true);
-if($list)
+/*var_dump($list);
+echo 'f';
+exit();
+if($list!=)
 return $list;
 else
-return 'no tasks';
+return 'no tasks';*/
+
+return $list;
 
 }
 
