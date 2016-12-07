@@ -10,6 +10,8 @@ $list_modifier_details=array();
 $list_owner_details=array();
 
 
+/*var_dump($list_owner);
+exit();*/
 if(!empty($list_owner))
 {
 
@@ -50,10 +52,10 @@ foreach ($list_modifier as $group)
 
 }
 }
-
-//print_r($list_readonly_details);
-//print_r($list_owner_details);
-//print_r($list_modifier_details);
+/*
+print_r($list_readonly_details);
+print_r($list_owner_details);
+print_r($list_modifier_details);*/
 /*
 print_r($list_owner_details);*/
 ?>

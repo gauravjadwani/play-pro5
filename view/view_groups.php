@@ -66,6 +66,7 @@ $arr=array($list_owner_details,$list_modifier_details,$list_readonly_details);
                         {
                           foreach($k as $k1)
                           echo $k1.',';
+                          /*echo implode(',', $k);*/
                         }
                         else
                           echo $k;

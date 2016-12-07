@@ -5,8 +5,8 @@ include_once '../config/session.php';
 
 $list_groups=get_list_user_groups($user_id);
 
-//print_r($list_groups);
-//exit();
+/*var_dump($list_groups);
+exit();*/
 if($list_groups!='no groups')
 {
 
@@ -14,6 +14,9 @@ $list_readonly=array();
 $list_modifier=array();
 $list_owner=array();
 
+/*print_r($list_groups);
+exit();
+*/
 
 foreach ($list_groups as $group_id) 
 {

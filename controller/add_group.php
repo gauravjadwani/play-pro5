@@ -9,7 +9,8 @@ $group_list_members_modify=$_POST['list_members_modify'];
 
 $created_on=time();
 $closed_on='live';
-$list_of_projects='"nil"';
+//$nil_json_decode()
+$list_of_projects=json_encode('nil');
 
 $group_id=create_group($group_name,$created_on,$closed_on,$user_id,$list_of_projects);
 //set_permissions_for_group($group_id,$email,1);

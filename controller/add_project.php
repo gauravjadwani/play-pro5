@@ -7,7 +7,8 @@ $project_name=$_POST['name_of_the_project'];
 $associated_group=$_POST['associated_group'];
 $desc=$_POST['desc'];
 $deadline=$name=$_POST['deadline'];
-$list_of_tasks='"nil"';
+
+$list_of_tasks=json_encode('nil');
 $created_on=time();
 $current_time=time();
 $closed_on='live';
