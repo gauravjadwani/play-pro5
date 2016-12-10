@@ -253,6 +253,8 @@ function create_group_db($name,$created_on,$closed_on,$created_by,$list_of_proje
         $email_user_id=$GLOBALS['r']->hget('user','email:'.$created_by);
         set_permissions_for_group_db($group_id,$email_user_id,1);
 
+        set_group_state_db($group_id,1);
+
         
         //add_group_to_user_list_of_groups_db($created_by,$group_id);
 
@@ -413,6 +415,10 @@ $list=list_group_members_db($group_id);
 array_push($group_details,$list);
 
 
+$group_state=check_group_state_db($group_id);
+array_push($group_details,$group_state);
+
+
 /*print_r($group_details);
 exit(); */
 return $group_details;
@@ -442,6 +448,38 @@ return $list_group_members;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+//1 is for active 2 is for deactive 3 is for delete
+function set_group_state_db($group_id,$state)
+{
+
+$check=$GLOBALS['r']->zadd('state:group',$state,$group_id);
+
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+function check_group_state_db($group_id)
+{
+$state=$GLOBALS['r']->zscore('state:group',$group_id);
+return $state;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////
+function group_closed_db($group_id,$time)
+{
+
+   $check_closed=$GLOBALS['r']->hset('group','closed_on:'.$group_id,$time);
+
+
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////
+function group_notifications($group_id,$value,$value)
+{
+
+user_set_notifications_db($user_id,$current_time,$value);
+
+
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 ////------------------------------projects---------------------------------------------////
 
@@ -459,6 +497,7 @@ $GLOBALS['r']->hMset('project',array('name:'.$project_id=>$name,'created_on:'.$p
      $GLOBALS['r']->hincrby('parent','project_id',1);
     
      add_project_list_group($project_id,$associated_group);
+     set_project_state_db($project_id,1);
     return $project_id;
 
 }
@@ -549,6 +588,9 @@ $list=$GLOBALS['r']->hget('project','created_by:'.$project_id);
 array_push($project_details,$list);
 
 //print_r($project_details);
+$check=check_project_state_db($project_id);
+array_push($project_details,$check);
+
 return $project_details;
 
 
@@ -625,6 +667,30 @@ $p=$GLOBALS['r']->zscore('group_permissions:'.$associated_group,$user_id);
             return 'user_permission for project not found';
 
         //exit();
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////
+function set_project_state_db($project_id,$state)
+{
+$check=$GLOBALS['r']->zadd('state:project',$state,$project_id);
+}
+    /*
+    $group_state=check_group_state_db($group_id);
+    array_push($group_details,$group_state);*/
+/////////////////////////////////////////////////////////////////////////////////////////////////
+function check_project_state_db($project_id)
+{
+
+$check_state=$GLOBALS['r']->zscore('state:project',$project_id);
+/*print $check_state.'f';
+exit();*/
+return $check_state;
+}
+function project_closed_db($project_id,$time)
+{
+
+   $check_closed=$GLOBALS['r']->hset('project','closed_on:'.$project_id,$time);
+
 
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////

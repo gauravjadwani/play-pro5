@@ -103,6 +103,27 @@ function list_group_members($group_id)
     return $list_members;
 }
 
+
+
+function set_group_state($group_id,$state)
+{
+
+$check=set_group_state_db($group_id,$state);
+}
+
+function check_group_state($group_id)
+{
+$check=check_group_state_db($group_id);
+return $check;
+}
+function group_closed($group_id,$time)
+{
+   $check=group_closed_db($group_id,$time);
+    return $check;
+
+}
+
+
 //----------------------------------project----------------------------------------//
 
 function create_project($name,$created_on,$desc,$deadline,$associated_group,$list_of_tasks,$closed_on,$created_by)
@@ -116,11 +137,13 @@ function list_user_projects($user_id)
     $list=list_user_projects_db($user_id);
     return $list;
 }
+
 function view_project_details($project_id)
 {
 $project_details=view_project_details_db($project_id);
 return $project_details;
 }
+
 function check_user_permission_for_project($project_id,$user_id)
 {
 $permission=check_user_permission_for_project_db($project_id,$user_id);
@@ -128,6 +151,30 @@ return $permission;
 
 
 }
+
+function set_project_state($project_id,$state)
+{
+    $check=set_project_state_db($project_id,$state);
+
+
+
+}
+function check_project_state($project_id)
+{
+
+$check=check_project_state_db($project_id);
+return $check;
+
+    }
+
+    function project_closed($project_id,$time)
+    {
+
+project_closed_db($project_id,$time);
+
+    }
+
+
 
 //----------------------------------------task-----------------------------------------------//
 
