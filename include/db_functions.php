@@ -704,17 +704,20 @@ function create_task_db($name,$assinged_for,$created_on,$initiator,$priority,$cl
     //echo $initiator;
     //echo $priority;
     //exit();
+      $nil_encode=jsonencode_data('nil');
     $GLOBALS['r']->hsetnx('parent','task_id','1');
     $task_id=$GLOBALS['r']->hget('parent','task_id');
 $GLOBALS['r']->hMset('task',array('name:'.$task_id=>$name,'assinged_for:'.$task_id=>$assinged_for,'created_on:'.$task_id=>$created_on,'association:'.$task_id=>'"nil"','initiator:'.$task_id=>$initiator,'priority:'.$task_id=>$priority,'closed_on:'.$task_id=>$closed_on)); 
     
-    
+     set_task_state_db($task_id,$state);
+
      $GLOBALS['r']->hincrby('parent','task_id',1);
 
     return $task_id;
         
     
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function add_task_to_self_db($task_id,$user_id)
 {
@@ -812,11 +815,12 @@ else
 
 
 $list=$GLOBALS['r']->hget('project','list_of_tasks:'.$project_id);
-    if($list!='"nil"')
+ $list_jsondeocde=json_decode($list,true);
+    if($list_jsondeocde!='nil')
     {
       
         
-        $list_jsondeocde=json_decode($list,true);
+       
         
          //$d=array();
         //$list=array($group_id);
@@ -883,10 +887,14 @@ $list=$GLOBALS['r']->hget('task','closed_on:'.$task_id);
 array_push($task_details,$list);
 
 
+$list=check_task_state_db($task_id);
+array_push($task_details,$list);
+
+
 return $task_details;
 
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function view_self_tasks_db($user_id)
 {
@@ -902,6 +910,69 @@ else
 return 'no tasks';*/
 
 return $list;
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////
+function view_user_projects_tasks_db($user_id)
+{
+$list=list_user_projects_db($user_id);
+/*print_r($list);*/
+if($list!='nil')
+{
+$list_tasks=array();
+
+foreach($list as $l)
+{
+    $tasks_project=view_project_details_db($l);
+    /*print_r($tasks_project);*/
+    
+
+    if($tasks_project[6]!='nil')
+    {
+            $list_tasks=array_merge($list_tasks,$tasks_project[6]);
+           /* $list_tasks=$list_tasks+$tasks_project[6];*/
+        
+        /*    echo 'fe';*/
+  /*      print_r($tasks_project[6]);*/
+
+    }
+}   
+/*echo 'f';
+print_r($list_tasks);
+exit();*/
+/*print_r($list_tasks);
+exit();*/
+return $list_tasks;
+
+
+
+}
+else
+return 'nil';
+
+/*return $list;*/
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function set_task_state_db($task_id,$state)
+{
+$check=$GLOBALS['r']->zadd('state:task',$state,$task_id);
+}
+   
+/////////////////////////////////////////////////////////////////////////////////////////////////
+function check_task_state_db($task_id)
+{
+
+$check_state=$GLOBALS['r']->zscore('state:task',$task_id);
+
+return $check_state;
+}
+function task_closed_db($task_id,$time)
+{
+
+$check_closed=$GLOBALS['r']->hset('task','closed_on:'.$task_id,$time);
+
 
 }
 

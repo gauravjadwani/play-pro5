@@ -9,7 +9,7 @@ if($check_state_group==1)
 set_group_state($group_id,3);
 group_closed($group_id,$time);
 echo json_encode(array('errors'=>'0','responce'=>'success'));
-}n
+}
 else
 {
 echo json_encode(array('errors'=>'1','responce'=>'faliure'));

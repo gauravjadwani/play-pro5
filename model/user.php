@@ -218,6 +218,13 @@ return $details;
 
 
 }
+function view_user_projects_tasks($user_id)
+{
+
+$list_tasks=view_user_projects_tasks_db($user_id);
+return $list_tasks;
+
+}
 
 
 ?>

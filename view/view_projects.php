@@ -73,9 +73,9 @@ include_once '../controller/list_user_projects.php';
                 for ($j=0;$j<count($arr[$i]);$j++) 
                         {
                         echo '<tr>';
-                    if($i==0)
+                    if($i==1)
                       print '<td>owner</td>';
-                    else if($i==1)
+                    else if($i==2)
                        print '<td>modifier</td>';
                     else
                       print '<td>read-only</td>';
@@ -136,7 +136,7 @@ include_once '../controller/list_user_projects.php';
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title">Confirmation Box</h4>
       </div>
       <div class="modal-body">
        <div class="form-group">
