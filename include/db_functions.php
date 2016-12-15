@@ -234,6 +234,31 @@ array_push($user_details,$list1);
 return $user_details;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function get_list_state_users_db($state)
+{
+
+$list=$GLOBALS['r']->zrangebyscore('state:user',$state,$state);
+
+$state_list=array();
+
+foreach($list as $id)
+{
+
+$email=$GLOBALS['r']->hget('user','email:'.$id);
+
+array_push($state_list,$email);
+
+
+}
+
+return $state_list;
+
+
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 ///----------------------------------user---------------------------------------///
 

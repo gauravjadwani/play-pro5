@@ -2,6 +2,8 @@
 
 <?php
 include_once '../common_utilities/header.php';
+include_once '../controller/list_users.php';
+
 ?>
     <div class='container'>
         <div class='row'>

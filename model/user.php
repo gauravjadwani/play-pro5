@@ -58,6 +58,15 @@ $check_login=user_login_db($user_id,$user_password);
 return $check_login;
 }
 
+function get_list_state_users($state)
+{
+
+$list=get_list_state_users_db($state);
+return $list;
+
+
+
+}
 //-----------------------------------------group----------------------------------//
 
 function create_group($name,$created_on,$closed_on,$created_by,$list_of_projects)
