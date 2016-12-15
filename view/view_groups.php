@@ -54,7 +54,10 @@ include_once '../controller/view_groups.php';
 
 
           <?php
-          
+       /*   print_r($list_owner_details);
+          print_r($list_modifier_details);
+          print_r($list_readonly_details);
+          exit();*/
        $arr=array($list_owner_details,$list_modifier_details,$list_readonly_details);
   
           for ($i=0; $i<count($arr) ; $i++) 
@@ -92,7 +95,8 @@ include_once '../controller/view_groups.php';
                                 if($arr[$i][$j][$k]==3)
                                 $var=true;
                                 else
-                                $var=false;      
+                                $var=false;
+                                var_dump($arr[$i][$j][$k]);    
       print '<button type="button" class="btn btn-info btn-sm" onclick="groupid(this.id)" data-toggle="modal" data-target="#myModal" value="' . $arr[$i][$j][0]. '" id="' . $arr[$i][$j][0]. '" ng-init="false" ng-disabled="' .$var. '">DELETE</button>'; 
              /* continue;    */                          
                                   }

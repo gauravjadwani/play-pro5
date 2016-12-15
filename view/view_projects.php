@@ -62,16 +62,19 @@ include_once '../controller/list_user_projects.php';
           print_r($list_project_readonly_details);
           exit();*/
           
-       $arr=array($list_project_modifier_details,$list_project_owner_details,$list_project_readonly_details );
+       $arr=array($list_project_modifier_details,$list_project_owner_details,$list_project_readonly_details);
+
   
   /*  print_r($list_project_readonly_details);
     exit();*/
           for ($i=0; $i<count($arr) ; $i++) 
                  { 
                  
-                   if($i==2)
-                    $var='true';
-
+                  /*   if($i==2)
+                     {
+                      $var=true;
+                        echo 'gaidg';
+                      }*/
 
                 for ($j=0;$j<count($arr[$i]);$j++) 
                         {
@@ -100,11 +103,11 @@ include_once '../controller/list_user_projects.php';
                                   {
                                 if($arr[$i][$j][$k]==3)
                                 $var=true;
+                                elseif($i==2)
+                                $var=true;
                                 else
                                 $var=false;  
-                                /*echo([$i][$j][$k]); */
-                             /*   var_dump([$i][$j][$k]);
-                                exit();*/
+                               
       print '<button type="button" class="btn btn-info btn-sm" onclick="projectid(this.id)" data-toggle="modal" data-target="#myModal" value="' . $arr[$i][$j][0]. '" id="' . $arr[$i][$j][0]. '" ng-init="false" ng-disabled="'.$var.'">DELETE</button>'; 
              /* continue;    */                          
                                   }

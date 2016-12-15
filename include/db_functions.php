@@ -494,6 +494,8 @@ $GLOBALS['r']->hMset('project',array('name:'.$project_id=>$name,'created_on:'.$p
     user_set_notifications_db($created_by,$current_time,'you created the project '.$name.' on  '.$created_on);
     
     user_set_notifications_db($created_by,$current_time,'you added the group id:'.$associated_group.' on  '.$created_on.' in the project '.$name);
+     
+
      $GLOBALS['r']->hincrby('parent','project_id',1);
     
      add_project_list_group($project_id,$associated_group);
