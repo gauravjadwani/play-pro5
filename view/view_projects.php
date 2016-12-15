@@ -56,8 +56,11 @@ include_once '../controller/list_user_projects.php';
   
 
           <?php
-
-          
+/*
+          print_r($list_project_modifier_details);
+          print_r($list_project_owner_details);
+          print_r($list_project_readonly_details);
+          exit();*/
           
        $arr=array($list_project_modifier_details,$list_project_owner_details,$list_project_readonly_details );
   
@@ -67,16 +70,16 @@ include_once '../controller/list_user_projects.php';
                  { 
                  
                    if($i==2)
-                    $var='true  ';
+                    $var='true';
 
 
                 for ($j=0;$j<count($arr[$i]);$j++) 
                         {
                         echo '<tr>';
-                    if($i==1)
-                      print '<td>owner</td>';
-                    else if($i==2)
-                       print '<td>modifier</td>';
+                    if($i==0)
+                      print '<td>modifier</td>';
+                    else if($i==1)
+                       print '<td>owner</td>';
                     else
                       print '<td>read-only</td>';
 
@@ -98,8 +101,11 @@ include_once '../controller/list_user_projects.php';
                                 if($arr[$i][$j][$k]==3)
                                 $var=true;
                                 else
-                                $var=false;      
-      print '<button type="button" class="btn btn-info btn-sm" onclick="projectid(this.id)" data-toggle="modal" data-target="#myModal" value="' . $arr[$i][$j][0]. '" id="' . $arr[$i][$j][0]. '" ng-init="false" ng-disabled="' .$var. '">DELETE</button>'; 
+                                $var=false;  
+                                /*echo([$i][$j][$k]); */
+                             /*   var_dump([$i][$j][$k]);
+                                exit();*/
+      print '<button type="button" class="btn btn-info btn-sm" onclick="projectid(this.id)" data-toggle="modal" data-target="#myModal" value="' . $arr[$i][$j][0]. '" id="' . $arr[$i][$j][0]. '" ng-init="false" ng-disabled="'.$var.'">DELETE</button>'; 
              /* continue;    */                          
                                   }
 
