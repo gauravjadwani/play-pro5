@@ -335,8 +335,11 @@ function set_permissions_for_group_db($group_id,$list_of_email,$token)
     $group_name=$GLOBALS['r']->hget('group','name:'.$group_id);
     $split_email=split(",",$list_of_email);
     
-    for($i=0;$i<sizeof($split_email);$i++)
+    for($i=0;$i<count($split_email);$i++)
 {
+    if($split_email[$i]!="")
+    {
+
     $user_id_email=$GLOBALS['r']->hget('email:user',$split_email[$i]);
     
     $GLOBALS['r']->zadd("group_permissions:".$group_id,$token,$user_id_email);
@@ -372,6 +375,7 @@ function set_permissions_for_group_db($group_id,$list_of_email,$token)
     {
         continue;
     }
+}
 }
     return 'set_permissions_db_functions';
 }

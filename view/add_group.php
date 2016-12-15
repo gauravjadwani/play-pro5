@@ -2,12 +2,15 @@
 
 <?php
 include_once '../common_utilities/header.php';
-include_once '../controller/list_users.php';
+/*include_once '../controller/list_users.php';*/
 
 ?>
     <div class='container'>
         <div class='row'>
-            <div class="col-sm-3"></div>
+        <div class="col-lg-6">
+            
+                <div class="col-sm-3">
+            </div>
             <form action='../controller/add_group.php' method='POST'>
             <div class="col-sm-7">
                     <h1>GROUP DETAILS</h1>
@@ -29,6 +32,10 @@ include_once '../controller/list_users.php';
             </form>
             <div class="col-sm-2">
                 
+            </div>
+            </div>
+            <div class="col-lg-6">
+            guarav
             </div>
         </div>
 </div>
