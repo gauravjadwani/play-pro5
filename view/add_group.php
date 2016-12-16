@@ -87,19 +87,21 @@ include_once '../common_utilities/header.php';
                /* console.log($(this).attr('id'));
 
 */
-                    console.log(a);
+                   
+                    $check=a;
+                     console.log($check);
                }
             $scope.select_email=function($email)
             {
 
                 console.log('entered email'+$email);
 
-                    if($scope.f_id=='inp')
+                    if($check==1)
                     {
                 document.getElementById("inp").value=$email+','+document.getElementById("inp").value;
                 console.log('inp reached');
                     }
-                    else
+                    else if($check==2)
                     {
                      document.getElementById("inp2").value=$email+','+document.getElementById("inp2").value; 
                       console.log('inp2 reached');  
