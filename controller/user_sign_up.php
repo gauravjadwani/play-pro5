@@ -31,12 +31,13 @@ $result=create_user($email,$name,$mobile,$password,$current_time);
 if($result>0)
 {
     header("Location: ../view/login.html");
-
+    	$data=$arrayName = array('email' =>$email ,'id' =>$result);
+    	$json_data=json_encode($data);
 
 //----------------sending asyn request--------------------------------------------//
     $client = new \GuzzleHttp\Client();
 
-$request = new \GuzzleHttp\Psr7\Request('POST', 'http://localhost/play-pro5/controller/sendmail.php',array() ,$email);
+$request = new \GuzzleHttp\Psr7\Request('POST', 'http://localhost/play-pro5/controller/sendmail.php',array() ,$json_data);
 
 $promise = $client->sendAsync($request)->then(function ($response) {
    /* echo 'I completed! ' . $response->getBody();*/
