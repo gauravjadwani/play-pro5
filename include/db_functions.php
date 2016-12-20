@@ -925,7 +925,7 @@ array_push($task_details,$list);
 return $task_details;
 
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function view_self_tasks_db($user_id)
 {
@@ -943,7 +943,7 @@ return 'no tasks';*/
 return $list;
 
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 function view_user_projects_tasks_db($user_id)
 {
 $list=list_user_projects_db($user_id);
@@ -1009,13 +1009,53 @@ $check_closed=$GLOBALS['r']->hset('task','closed_on:'.$task_id,$time);
 
 ///---------------------------------------email--------------------------------------------------///
 
-function send_mail($sender_username,$sender_password,$receiver_eamil,$data)   
+function send_mail_db($receiver_email,$subject,$body)   
 {
+  
+ini_set('max_execution_time', 0);
 
+require_once('../phpmailer/PHPMailerAutoload.php');
+define('GUSER', $GLOBALS['sender_email']); // GMail username
+define('GPWD', $GLOBALS['sender_password']); // GMail password
 
+function smtpmailer($to, $from, $from_name, $subject, $body) 
+{ 
 
+try{
+ global $error;
+  $mail = new PHPMailer();
 
+  $mail->IsSMTP();
+  $mail->Debugoutput = 'html';
+  $mail->SMTPAuth = true;  // authentication enabled
+  $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+  $mail->Host = 'smtp.gmail.com';
+  $mail->Port = 465;
+  $mail->Username = GUSER;  
+  $mail->Password = GPWD;           
+  $mail->SetFrom($from, $from_name);
+  $mail->Subject = $subject;
+  $mail->Body = $body;
+  $mail->AddAddress($to);
+  
 
+  if(!$mail->Send()) {
+    $error = 'Mail error: '.$mail->ErrorInfo; 
+    return false;
+  } else {
+    $error = 'Message sent!';
+    return true;
+  }
+}
+catch(Exception $e){
+
+}
+}
+
+smtpmailer($receiver_email,$GLOBALS['sender_email'],$GLOBALS['sender_name'],$subject,$body);
+if(isset($error)){
+  print_r($error);
+}
 
 
 }

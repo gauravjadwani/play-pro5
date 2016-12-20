@@ -235,5 +235,10 @@ return $list_tasks;
 
 }
 
+///---------------------------------------------email------------------------------------------------///
+function send_mail($receiver_email,$subject,$body)
+{
+     $check_email=send_mail_db($receiver_email,$subject,$body);
 
+}
 ?>
