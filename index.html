@@ -154,7 +154,7 @@ module1.controller('signupcontroller', function($scope, $http)
 
          var mysubmit= document.getElementById("q");
   var myimg = document.createElement("img");
-  myimg.src="../common_utilities/p.gif";
+  myimg.src="common_utilities/p.gif";
   myimg.id="q";
   mysubmit.parentNode.replaceChild(myimg, mysubmit);
   $scope.user=$scope.master;
@@ -167,7 +167,7 @@ module1.controller('signupcontroller', function($scope, $http)
 
 $http({
         method: 'POST',
-        url: '../controller/user_sign_up.php',
+        url: 'controller/user_sign_up.php',
          data: $.param({'data': $scope.json}),
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function(response) 
@@ -201,6 +201,7 @@ $http({
 
        $scope.reset=function()
        {
+        console.log("re");
           $scope.user = angular.copy($scope.master);
 
        }
