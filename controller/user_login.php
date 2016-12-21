@@ -1,6 +1,7 @@
 <?php
 include_once '../model/user.php';
 
+var_dump($_REQUEST);
 $user_id=$_REQUEST['id'];
 $user_password=$_REQUEST['passwd'];
 

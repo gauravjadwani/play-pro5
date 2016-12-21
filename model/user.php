@@ -1,5 +1,3 @@
-
-
 <?php 
 
 include '../include/db_functions.php';
