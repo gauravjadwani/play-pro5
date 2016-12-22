@@ -140,10 +140,10 @@
 
 module1.controller('signupcontroller', function($scope, $http) 
   {
-    console.log($scope.name);
+/*    console.log($scope.name);*/
    $scope.master = {name:"",email:"",mobile:"",password:""};
-   $scope.user={name:""}
-   console.log(name);
+  /* $scope.user={name:""}*/
+   /*console.log(name);*/
 
     $scope.submit=function()
     {
@@ -187,11 +187,11 @@ $http({
               var gifimg= document.getElementById("q");
               /*console.log(gifimg);*/
   var inp = document.createElement("input");
-   inp.class="btn btn-default";
+   inp.id="q";
   inp.type="submit";
-  inp.class="btn btn-default";
+  inp.className="btn btn-default";
   inp.value="signup";
-  inp.class="btn btn-default";
+ /* inp.class="btn btn-default";*/
   console.log(inp);
   gifimg.parentNode.replaceChild(inp,gifimg);
             }

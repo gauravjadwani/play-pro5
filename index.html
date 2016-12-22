@@ -84,7 +84,9 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default" ng-click="submit()" id="q">Sign up</button>
+                          <img src="common_utilities/p.gif" alt"guarav" style="visibility:hidden;" id="gif">  
+                          <button type="submit" class="btn btn-default" ng-click="submit()" id="q">Sign up</button>
+
                             <button type = "submit" class = "btn btn-default" ng-click="reset()">Reset</button>
                         </div>
                     </div>
@@ -95,7 +97,7 @@
                     <div class="col-md-6">
                     
       <div class="col-md-12">
-           <form class="form-horizontal" role="form" ng-controller="logincontroller" action="controller/user_login.php" method="POST">
+           <form class="form-horizontal" role="form" ng-controller="logincontroller" action="../controller/user_login.php" method="POST">
    
    <div class = "form-group" >
       <label for = "id" class = "col-sm-2 control-label">USER_ID</label>
@@ -140,10 +142,10 @@
 
 module1.controller('signupcontroller', function($scope, $http) 
   {
-   /* console.log($scope.name);*/
+    console.log($scope.name);
    $scope.master = {name:"",email:"",mobile:"",password:""};
    $scope.user={name:""}
-   /*console.log(name);*/
+  /* console.log(name);*/
 
     $scope.submit=function()
     {
@@ -151,12 +153,14 @@ module1.controller('signupcontroller', function($scope, $http)
        console.log('clicked'+$scope.user.name);
         $scope.json = angular.toJson($scope.user);
         console.log($scope.json);
+         document.getElementById('q').style.visibility = "hidden";
+              document.getElementById('gif').style.visibility = "visible";
 
-         var mysubmit= document.getElementById("q");
+         /*var mysubmit= document.getElementById("q");
   var myimg = document.createElement("img");
   myimg.src="common_utilities/p.gif";
   myimg.id="q";
-  mysubmit.parentNode.replaceChild(myimg, mysubmit);
+  mysubmit.parentNode.replaceChild(myimg, mysubmit);*/
   $scope.user=$scope.master;
 
 
@@ -184,16 +188,20 @@ $http({
             if(response.data=="successfull")
             {
               console.log("ss");
-              var gifimg= document.getElementById("q");
-              /*console.log(gifimg);*/
+               
+              document.getElementById('gif').style.visibility = "hidden";
+                document.getElementById('q').style.visibility = "visible";
+            /*  var gifimg= document.getElementById("q");
+           
   var inp = document.createElement("input");
-   inp.class="btn btn-default";
+   inp.id="q";
   inp.type="submit";
-  inp.class="btn btn-default";
+  inp.className="btn btn-default";
   inp.value="signup";
-  inp.class="btn btn-default";
+  inp.setAttribute("ng-click", "submit()");
+
   console.log(inp);
-  gifimg.parentNode.replaceChild(inp,gifimg);
+  gifimg.parentNode.replaceChild(inp,gifimg);*/
             }
 
     
@@ -201,7 +209,6 @@ $http({
 
        $scope.reset=function()
        {
-        console.log("re");
           $scope.user = angular.copy($scope.master);
 
        }
