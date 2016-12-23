@@ -63,8 +63,8 @@ include_once '../controller/view_groups.php';
           for ($i=0; $i<count($arr) ; $i++) 
                  { 
                  
-                   if($i==3)
-                    $var='true';
+                 /*  if($i==3)
+                    $var='true';*/
 
 
                 for ($j=0;$j<count($arr[$i]);$j++) 
@@ -94,9 +94,11 @@ include_once '../controller/view_groups.php';
                                   {
                                 if($arr[$i][$j][$k]==3)
                                 $var=true;
+                                elseif($i==2)
+                                $var=true;
                                 else
-                                $var=false;
-                                var_dump($arr[$i][$j][$k]);    
+                                $var=false; 
+                               /* var_dump($arr[$i][$j][$k]);  */  
       print '<button type="button" class="btn btn-info btn-sm" onclick="groupid(this.id)" data-toggle="modal" data-target="#myModal" value="' . $arr[$i][$j][0]. '" id="' . $arr[$i][$j][0]. '" ng-init="false" ng-disabled="' .$var. '">DELETE</button>'; 
              /* continue;    */                          
                                   }
