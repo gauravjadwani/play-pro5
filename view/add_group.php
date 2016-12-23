@@ -76,7 +76,7 @@ include_once '../common_utilities/header.php';
             $http({
                 method: 'POST',
                 url: '../controller/list_users.php',
-                data: $.param({'id':1}),
+                data: $.param({'id':2}),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function(response) 
             {

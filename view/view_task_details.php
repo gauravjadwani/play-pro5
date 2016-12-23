@@ -17,7 +17,7 @@ include_once '../controller/view_user_projects_tasks.php';
   
       
     <div class="table-responsive">
-    <h2>PROJECTS</h2>
+    <h2>Task details</h2>
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -56,8 +56,11 @@ include_once '../controller/view_user_projects_tasks.php';
   
 
            <?php
-               /* print_r($task_details_array);
+           
+                /*print_r($task_details_array);
                 exit();*/
+                if($task_details_array[0]!='nil')
+                {
 
               for($i=0;$i<count($task_details_array);$i++)
               {
@@ -83,6 +86,7 @@ include_once '../controller/view_user_projects_tasks.php';
 
 
               }
+            }
 
            ?>
       

@@ -641,23 +641,26 @@ return $project_details;
         exit();*/
 
         $list_of_groups=$details[3];
+       /* print_r($details);
+        exit();*/
 
          if($list_of_groups!='nil')
                     {
-                        /*echo 'j';
+                       /* echo 'j';
                         exit();*/
                            /* var_dump($list_of_groups);
                             exit();*/
                 foreach ($list_of_groups as $group_id)
                 {
             $group_details=view_group_details_db($group_id);
-          /*print_r($group_details);
+      /*    print_r($group_details);
           echo 'd';
           exit();
-        */
+  */      
                         //var_dump($group_details[5]);
                         if(is_array($group_details[5]))
                         {
+                           /* echo "f";*/
                     foreach ($group_details[5] as $projects) 
                         array_push($list_projects,$projects);
                         }
@@ -671,10 +674,12 @@ return $project_details;
 
                 }
             }
-             /*var_dump($group_details[5]);
-           print_r($list_projects);
-           exit();
-*/
+            else
+                {array_push($list_projects,'nil');}
+             //var_dump($group_details[5]);
+         /*  print_r($list_projects);
+           exit();*/
+          
                 return $list_projects;
     }
 
@@ -945,15 +950,19 @@ return $list;
 function view_user_projects_tasks_db($user_id)
 {
 $list=list_user_projects_db($user_id);
-/*print_r($list);*/
-if($list!='nil')
-{
+/*print_r($list);
+echo 'f0';
+exit();*/
 $list_tasks=array();
+if($list[0]!='nil')
+{
+
 
 foreach($list as $l)
 {
     $tasks_project=view_project_details_db($l);
-    /*print_r($tasks_project);*/
+    /*print_r($tasks_project);
+    exit();*/
     
 
     if($tasks_project[6]!='nil')
@@ -977,7 +986,13 @@ return $list_tasks;
 
 }
 else
-return 'nil';
+{
+array_push($list_tasks,'nil');
+/*$list_tasks[]='nil';*/
+/*exit();*/
+return $list_tasks;
+}
+
 
 /*return $list;*/
 
