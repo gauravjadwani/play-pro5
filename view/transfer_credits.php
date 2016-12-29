@@ -76,6 +76,13 @@ include_once '../common_utilities/header.php';
                         
                 <select class="form-control" name="group_id">
                 <option selected value='default'>No Project selected</option>
+                <?php
+                    foreach($list_project_owner_state as $project_id)
+                    {
+                  ?>
+                <option value=''><?php echo $project_id;?></option>
+                <?php
+                }?>
                 </select>
                 </div>
                </div>
@@ -117,11 +124,12 @@ include_once '../common_utilities/header.php';
               &nbsp
               
               <div class="col-lg-10">
-              <h1>Tasks</h1>
+              <h1>Task</h1>
                <div class="<form-group">
                         
                 <select class="form-control" name="group_id">
                 <option selected value='default'>No Task selected</option>
+                
                 </select>
                 </div>
                </div>
@@ -131,8 +139,16 @@ include_once '../common_utilities/header.php';
                <div class="col-lg-2"></div></div>
                <div class="row">
                <div class="col-lg-10">
+               <h1>Project</h1>
                   <select class="form-control" name="group_id">
                 <option selected value='default'>No Task selected</option>
+                <?php
+                    foreach($list_project_owner_state as $project_id)
+                    {
+                  ?>
+                <option value=''><?php echo $project_id;?></option>
+                <?php
+                }?>
                 </select>
                 </div>
                 <div class="col-lg-2">

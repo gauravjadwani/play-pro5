@@ -91,6 +91,11 @@ foreach($list as $project_id)
 print_r($list_project_modifier_details);
 print_r($list_project_readonly_details);*/
 //exit();
+/*
+print_r($list_project_modifier_state);
+print_r($list_project_readonly_state);
+print_r($list_project_owner_state);
+exit();*/
 
 
 ?>
