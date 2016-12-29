@@ -84,10 +84,15 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                          <img src="common_utilities/p.gif" alt"guarav" style="visibility:hidden;" id="gif">  
+                          
                           <button type="submit" class="btn btn-default" ng-click="submit()" id="q">Sign up</button>
 
                             <button type = "submit" class = "btn btn-default" ng-click="reset()">Reset</button>
+                            <img src="common_utilities/p.gif" alt"guarav" style="visibility:hidden;z-index:2;position: absolute;left: 30px;top:-10px" id="gif">
+                            <div id="email" style="visibility:hidden;">
+                            <p>email exists!</p></div>
+                             <div id="contact" style="visibility:hidden;">
+                            <p>mobile exists!</p></div>
                         </div>
                     </div>
                 </form>
@@ -203,6 +208,27 @@ $http({
   console.log(inp);
   gifimg.parentNode.replaceChild(inp,gifimg);*/
             }
+            else if(response.data=="email exist")
+            {
+               console.log("sss");
+               
+              document.getElementById('gif').style.visibility = "hidden";
+                document.getElementById('q').style.visibility = "visible";
+                document.getElementById('email').style.visibility="visible";
+                document.getElementById('email').style.color="red";
+
+            }
+            else if(response.data=="contact exist")
+            {
+               console.log("ssss");
+               
+              document.getElementById('gif').style.visibility = "hidden";
+                document.getElementById('q').style.visibility = "visible";
+                document.getElementById('contact').style.visibility="visible";
+                document.getElementById('contact').style.color="red";
+
+            }
+
 
     
     });

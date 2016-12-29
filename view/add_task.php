@@ -18,5 +18,7 @@ include_once '../common_utilities/header.php';
                 </div>
             </div>
         </div>
+        </body>
+        </html>
       
       

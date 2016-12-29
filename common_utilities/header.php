@@ -58,6 +58,7 @@ include_once '../config/session.php';
       <li><a href="dashboard.php"><span class="glyphicon glyphicon-user"></span><?php echo $name; ?></a></li>
       
     <li><a href="../view/add_task.php"><span class="glyphicon glyphicon-log-in"></span> ADD_TASK</a></li>
+    <li><a href="../view/transfer_credits.php"><span class="glyphicon glyphicon-log-in"></span>Credits</a></li>
     <li><a href="../view/view_task_details.php"><span class="glyphicon glyphicon-log-in"></span>VIEW TASKS</a></li>
     <li><a href="../view/add_project.php"><span class="glyphicon glyphicon-log-in"></span>ADD PROJECT</a></li>
      <li><a href="../view/add_group.php"><span class="glyphicon glyphicon-log-in"></span> ADD_GROUP</a></li>

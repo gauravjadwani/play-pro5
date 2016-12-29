@@ -29,7 +29,7 @@ if($name!=""||$password!=""||$email!=""||$mobile!="")
 $result=check_existence_of_user_email($email);
 if($result>0)
 {
-    echo "email exits";
+    echo "email exist";
 //$result=
 exit();
 }
@@ -37,7 +37,7 @@ exit();
 $result=check_existence_of_user_mobile($mobile);
 if($result===true)
 {
-    echo "contact exits";
+    echo "contact exist";
 //$result=
 exit();
 }

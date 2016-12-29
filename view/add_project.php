@@ -39,7 +39,7 @@ include_once '../controller/user_groups.php';
       
               <option  selected value='default'> -- select a group -- </option>
               <?php
-                    foreach ($list_modifier as $l) 
+                    foreach ($list_modifier_with_state as $l) 
                     
                     {   
 
@@ -53,7 +53,7 @@ include_once '../controller/user_groups.php';
               ?>
 
                 <?php
-                    foreach ($list_owner as $l) 
+                    foreach ($list_owner_with_state as $l) 
                     
                     {   
 

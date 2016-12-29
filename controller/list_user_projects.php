@@ -18,6 +18,10 @@ $list_project_modifier_details=array();
 $list_project_owner_details=array();
 $list_project_readonly_details=array();
 
+$list_project_modifier_state=array();
+$list_project_owner_state=array();
+$list_project_readonly_state=array();
+
 foreach($list as $project_id)
 {
 	/*$project_details=view_project_details($project_id);
@@ -30,6 +34,7 @@ foreach($list as $project_id)
   */
          //array_push($list_group_permission,$key);
 
+      $state_project=check_project_state($project_id);
 
       $permission=check_user_permission_for_project($project_id,$user_id);
 
@@ -37,33 +42,40 @@ foreach($list as $project_id)
 
          if($permission=='m')
          {
-         	
-
- 				array_push($list_project_modifier,$project_id);
-
-
-            $details=view_project_details($project_id);
-            array_push($list_project_modifier_details,$details);
+         	array_push($list_project_modifier,$project_id);
+               $details=view_project_details($project_id);
+               array_push($list_project_modifier_details,$details);
+            if($state_project==3)
+            {
+ 				 array_push($list_project_modifier_state,$project_id);
  				//echo 'm';
+         }
          }
          elseif($permission=='o')
          {
-         	
-         	//echo $permission;
- 				array_push($list_project_owner,$project_id);
+         	array_push($list_project_owner,$project_id);
 
 
             $details=view_project_details($project_id);
             array_push($list_project_owner_details,$details);
+         	//echo $permission;
+            if($state_project==3)
+            {
+ 				array_push($list_project_owner_state,$project_id);
+         }
          //echo 'o';
          }
          elseif($permission=='r')
          {
-         array_push($list_project_readonly,$project_id);
+            array_push($list_project_readonly,$project_id);
 
 
          $details=view_project_details($project_id);
             array_push($list_project_readonly_details,$details);
+            if($state_project==3)
+            {
+         array_push($list_project_readonly_state,$project_id);
+         }
          //echo 'r';
          }
 }
